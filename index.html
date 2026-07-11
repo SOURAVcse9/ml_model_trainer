@@ -1,0 +1,2281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HealthPlus Hospital AI - Advanced predictive analytics and machine learning dashboard for Heart Disease detection and risk classification.">
+  <meta name="author" content="HealthPlus Hospital AI Team">
+  <title>HealthPlus Hospital - Heart Disease Prediction AI</title>
+
+  <!-- CSS Design System Link -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <!-- Custom Cursor System (Follower + Core Pointer) -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+  <!-- Page Loading Splash Screen -->
+  <div id="loading-screen">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">HEALTHPLUS AI</div>
+  </div>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress-container">
+    <div id="scroll-progress"></div>
+  </div>
+
+  <!-- Global Header & Navigation -->
+  <header class="main-header">
+    <div class="container header-container">
+      <a href="#home" class="logo">
+        <i class="fa-solid fa-heart-pulse logo-icon"></i>
+        <div class="logo-text">HealthPlus <span>Hospital</span></div>
+      </a>
+
+      <!-- Navigation Links Menu -->
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#dataset" class="nav-link">Dataset</a></li>
+          <li><a href="#eda" class="nav-link">EDA</a></li>
+          <li><a href="#features" class="nav-link">Feature Engineering</a></li>
+          <li><a href="#models" class="nav-link">Models</a></li>
+          <li><a href="#prediction" class="nav-link">Prediction</a></li>
+          <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+          <li><a href="#team" class="nav-link">Team</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Theme Switcher, Search Box & Actions -->
+      <div class="nav-actions">
+        <div class="nav-search">
+          <input type="text" class="search-input" placeholder="Search...">
+          <button class="search-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" data-tooltip="Change Color Theme">
+          <i class="fa-regular fa-moon moon-icon"></i>
+          <i class="fa-regular fa-sun sun-icon"></i>
+        </button>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Website Section Containers (Architecture Only) -->
+  <main>
+    <!-- Skeletons for future sections to be appended -->
+    <section id="home" class="hero-section">
+      <!-- Particles Canvas -->
+      <canvas id="hero-particles"></canvas>
+      
+      <!-- Background Glow Elements -->
+      <div class="hero-bg-glow glow-1"></div>
+      <div class="hero-bg-glow glow-2"></div>
+      
+      <!-- Floating Medical Icons -->
+      <div class="floating-icons-container">
+        <div class="floating-icon icon-1" data-tooltip="Cardiology"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div class="floating-icon icon-2" data-tooltip="Clinical AI"><i class="fa-solid fa-brain"></i></div>
+        <div class="floating-icon icon-3" data-tooltip="Machine Learning"><i class="fa-solid fa-dna"></i></div>
+        <div class="floating-icon icon-4" data-tooltip="Diagnostic Tools"><i class="fa-solid fa-stethoscope"></i></div>
+        <div class="floating-icon icon-5" data-tooltip="Therapeutics"><i class="fa-solid fa-capsules"></i></div>
+      </div>
+
+      <!-- ECG Wave Background Overlay -->
+      <div class="ecg-line-overlay">
+        <svg viewBox="0 0 1400 300" preserveAspectRatio="none">
+          <path class="ecg-wave-path" d="M0,150 L300,150 L330,120 L350,180 L360,90 L380,210 L395,150 L410,150 L500,150 L800,150 L830,120 L850,180 L860,90 L880,210 L895,150 L910,150 L1000,150 L1400,150"></path>
+        </svg>
+      </div>
+
+      <div class="container hero-container-grid">
+        <!-- Hero Left / Typography -->
+        <div class="hero-content">
+          <div class="badge badge-primary hero-badge">
+            <span class="badge-dot pulse bg-primary"></span>
+            AI Diagnostic Platform
+          </div>
+          <h1 class="hero-title text-display">
+            AI-Powered <br>
+            <span class="typing-text" data-words='["Heart Disease Prediction", "Cardiovascular Diagnostics", "Real-time Risk Scaling"]'></span>
+          </h1>
+          <p class="hero-subtitle text-subheading">
+            Helping doctors and medical institutions identify cardiovascular anomalies early using deep analytical Machine Learning algorithms.
+          </p>
+          <div class="hero-actions flex gap-md">
+            <a href="#prediction" class="btn btn-primary glow-primary">
+              <i class="fa-solid fa-gauge-high"></i> Predict Now
+            </a>
+            <a href="#dataset" class="btn btn-outline">
+              <i class="fa-solid fa-table-cells"></i> Explore Dataset
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Right / 3D Card Visuals -->
+        <div class="hero-visual">
+          <div class="hero-3d-card glass-panel">
+            <div class="card-header flex items-center justify-between">
+              <div class="card-title flex items-center gap-xs">
+                <i class="fa-solid fa-circle-nodes text-gradient-primary"></i>
+                <span class="text-xs">AI Activity Analysis</span>
+              </div>
+              <span class="badge badge-success flex items-center gap-xxs" style="font-size: 0.65rem;">
+                <span class="badge-dot pulse bg-accent" style="width: 4px; height: 4px;"></span> Live
+              </span>
+            </div>
+            
+            <div class="visual-heart-rate-box">
+              <div class="heart-pulse-circle">
+                <i class="fa-solid fa-heart pulse"></i>
+              </div>
+              <div class="heart-rate-metrics">
+                <div class="metric-label">Heart Rate</div>
+                <div class="metric-value">72 <span class="unit">BPM</span></div>
+              </div>
+            </div>
+
+            <!-- Dynamic ECG pulse grid -->
+            <div class="mini-grid">
+              <div class="grid-cell">
+                <div class="cell-label">SYS / DIA</div>
+                <div class="cell-value text-gradient-accent">120/80</div>
+              </div>
+              <div class="grid-cell">
+                <div class="cell-label">SpO2</div>
+                <div class="cell-value">98%</div>
+              </div>
+              <div class="grid-cell">
+                <div class="cell-label">AI Confidence</div>
+                <div class="cell-value text-gradient-primary">94.8%</div>
+              </div>
+            </div>
+
+            <!-- Chart Simulation Visualizer -->
+            <div class="simulated-chart-container">
+              <div class="chart-bar bar-1"></div>
+              <div class="chart-bar bar-2"></div>
+              <div class="chart-bar bar-3"></div>
+              <div class="chart-bar bar-4"></div>
+              <div class="chart-bar bar-5"></div>
+              <div class="chart-bar bar-6"></div>
+              <div class="chart-bar bar-7"></div>
+              <div class="chart-bar bar-8"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#about" class="scroll-down-indicator" aria-label="Scroll to About Section">
+        <div class="mouse-scroll">
+          <div class="wheel-scroll"></div>
+        </div>
+        <span class="scroll-text">Explore AI Project</span>
+      </a>
+    </section>
+
+    <section id="about" class="about-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-secondary">Core Concepts</span>
+          <h2 class="text-h1 section-title">About The Project</h2>
+          <p class="text-subheading section-subtitle">
+            Leveraging predictive neural patterns to assist cardiologists in assessing coronary anomalies before critical complications arise.
+          </p>
+        </div>
+
+        <!-- Glass Cards Layout Grid (Problem, Objectives, Binary, AI Role, Benefits) -->
+        <div class="grid grid-3 gap-lg reveal">
+          
+          <!-- Problem Statement -->
+          <div class="glass-card hover-lift">
+            <div class="card-icon-header text-gradient-primary">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem;"></i>
+            </div>
+            <h3 class="text-h3 my-sm">Problem Statement</h3>
+            <p class="text-body text-small">
+              Cardiovascular diseases represent the leading cause of global mortality. Conventional diagnostics often suffer from human visual margins of error and processing constraints when resolving non-linear combinations of complex physiological variables.
+            </p>
+          </div>
+
+          <!-- Objectives -->
+          <div class="glass-card hover-lift">
+            <div class="card-icon-header text-gradient-accent">
+              <i class="fa-solid fa-bullseye" style="font-size: 2rem;"></i>
+            </div>
+            <h3 class="text-h3 my-sm">Objectives</h3>
+            <p class="text-body text-small">
+              To construct a highly responsive, binary predictive framework capable of categorizing cardiovascular risk profiles while providing transparent medical explanations, helping clinicians expedite emergency triaging loops.
+            </p>
+          </div>
+
+          <!-- Binary Classification -->
+          <div class="glass-card hover-lift">
+            <div class="card-icon-header text-gradient-primary">
+              <i class="fa-solid fa-code-fork" style="font-size: 2rem;"></i>
+            </div>
+            <h3 class="text-h3 my-sm">Binary Classification</h3>
+            <p class="text-body text-small">
+              The neural platform computes risk outcomes using binary logs: Class 0 (Normal cardiac baseline, low-risk markers) and Class 1 (Indication of coronary narrowing exceeding 50%, high risk, immediate critical clinical path).
+            </p>
+          </div>
+
+          <!-- Role of AI -->
+          <div class="glass-card hover-lift">
+            <div class="card-icon-header text-gradient-accent">
+              <i class="fa-solid fa-microchip" style="font-size: 2rem;"></i>
+            </div>
+            <h3 class="text-h3 my-sm">Role of AI</h3>
+            <p class="text-body text-small">
+              AI resolves multi-dimensional correlations (e.g. cholesterol coefficients interacting with ST slopes and thal baselines) that are hard to capture during typical clinical visual interpretations.
+            </p>
+          </div>
+
+          <!-- Real-world Benefits -->
+          <div class="glass-card hover-lift">
+            <div class="card-icon-header text-gradient-primary">
+              <i class="fa-solid fa-heart-circle-check" style="font-size: 2rem;"></i>
+            </div>
+            <h3 class="text-h3 my-sm">Clinical Benefits</h3>
+            <p class="text-body text-small">
+              Decreases initial evaluation timelines by up to 40%, automates preventative triage, increases diagnostic accuracy coefficients, and lowers cardiac complications through earlier preventative care.
+            </p>
+          </div>
+
+          <!-- Infographic Introduction Info Card -->
+          <div class="glass-card hover-lift flex flex-col justify-between" style="border-color: var(--secondary-glow);">
+            <div>
+              <div class="card-icon-header text-gradient-accent">
+                <i class="fa-solid fa-network-wired" style="font-size: 2rem;"></i>
+              </div>
+              <h3 class="text-h3 my-sm">Hospital Integration</h3>
+              <p class="text-body text-small">
+                The platform sits within the clinical triage pipeline, connecting patient intake data directly to machine learning risk calculations.
+              </p>
+            </div>
+            <a href="#prediction" class="btn btn-text text-small p-0 flex items-center gap-xxs" style="margin-top: var(--space-md); text-decoration: none;">
+              See Workflow Below &nbsp; <i class="fa-solid fa-arrow-down"></i>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Timeline Infographic Header -->
+        <div class="section-header reveal" style="margin-top: var(--space-huge); margin-bottom: var(--space-xl);">
+          <span class="badge badge-primary">Data Flow Pipeline</span>
+          <h2 class="text-h2">Clinical AI Integration Workflow</h2>
+          <p class="text-body text-small">Visual representation of real-time patient diagnostics using clinical AI agents.</p>
+        </div>
+
+        <!-- Workflow Animated Infographic -->
+        <div class="workflow-infographic-container reveal">
+          
+          <div class="workflow-step step-1">
+            <div class="step-num">1</div>
+            <div class="workflow-card glass-panel">
+              <i class="fa-solid fa-user-injured step-icon text-gradient-primary"></i>
+              <h4 class="text-h3 my-xs" style="font-size: 1.1rem;">Patient Intake</h4>
+              <p class="text-xs text-secondary" style="line-height: 1.4;">Physiological indicators (BP, age, cholesterol, ST-depression) are logged during patient triage.</p>
+            </div>
+          </div>
+
+          <div class="workflow-arrow arrow-1">
+            <i class="fa-solid fa-chevron-right arrow-horizontal"></i>
+            <i class="fa-solid fa-chevron-down arrow-vertical"></i>
+            <div class="pulse-particle"></div>
+          </div>
+
+          <div class="workflow-step step-2">
+            <div class="step-num">2</div>
+            <div class="workflow-card glass-panel">
+              <i class="fa-solid fa-microchip step-icon text-gradient-accent"></i>
+              <h4 class="text-h3 my-xs" style="font-size: 1.1rem;">AI Engine</h4>
+              <p class="text-xs text-secondary" style="line-height: 1.4;">The patient vector runs against optimized Random Forest and Gradient Boost models.</p>
+            </div>
+          </div>
+
+          <div class="workflow-arrow arrow-2">
+            <i class="fa-solid fa-chevron-right arrow-horizontal"></i>
+            <i class="fa-solid fa-chevron-down arrow-vertical"></i>
+            <div class="pulse-particle"></div>
+          </div>
+
+          <div class="workflow-step step-3">
+            <div class="step-num">3</div>
+            <div class="workflow-card glass-panel">
+              <i class="fa-solid fa-square-poll-horizontal step-icon text-gradient-primary"></i>
+              <h4 class="text-h3 my-xs" style="font-size: 1.1rem;">AI Diagnostic</h4>
+              <p class="text-xs text-secondary" style="line-height: 1.4;">Generates cardiac probability metrics, risk scores, and feature weights within 10ms.</p>
+            </div>
+          </div>
+
+          <div class="workflow-arrow arrow-3">
+            <i class="fa-solid fa-chevron-right arrow-horizontal"></i>
+            <i class="fa-solid fa-chevron-down arrow-vertical"></i>
+            <div class="pulse-particle"></div>
+          </div>
+
+          <div class="workflow-step step-4">
+            <div class="step-num">4</div>
+            <div class="workflow-card glass-panel">
+              <i class="fa-solid fa-user-md step-icon text-gradient-accent"></i>
+              <h4 class="text-h3 my-xs" style="font-size: 1.1rem;">MD Validation</h4>
+              <p class="text-xs text-secondary" style="line-height: 1.4;">The clinical team reviews the AI report and verifies feature parameters.</p>
+            </div>
+          </div>
+
+          <div class="workflow-arrow arrow-4">
+            <i class="fa-solid fa-chevron-right arrow-horizontal"></i>
+            <i class="fa-solid fa-chevron-down arrow-vertical"></i>
+            <div class="pulse-particle"></div>
+          </div>
+
+          <div class="workflow-step step-5">
+            <div class="step-num">5</div>
+            <div class="workflow-card glass-panel">
+              <i class="fa-solid fa-file-medical step-icon text-gradient-primary"></i>
+              <h4 class="text-h3 my-xs" style="font-size: 1.1rem;">Treatment</h4>
+              <p class="text-xs text-secondary" style="line-height: 1.4;">Personalized therapeutic paths are initialized based on risk details.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="dataset" class="dataset-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-primary">Dataset Reference</span>
+          <h2 class="text-h1 section-title">Cleveland Dataset Dictionary</h2>
+          <p class="text-subheading section-subtitle">
+            Reference schema detailing the 14 physiological parameters extracted from the Cleveland Heart Disease clinical dataset.
+          </p>
+        </div>
+
+        <!-- Controls Toolbar (Search & Statistics) -->
+        <div class="dataset-toolbar glass-panel reveal my-md">
+          <div class="search-box-wrapper form-group m-0" style="flex: 1; max-width: 400px;">
+            <div class="input-wrapper">
+              <input type="text" id="dataset-search" class="input-field" placeholder="Search features (e.g. cholesterol, slope)..." style="padding-left: 2.5rem;">
+              <i class="fa-solid fa-magnifying-glass input-icon" style="left: var(--space-md);"></i>
+            </div>
+          </div>
+          <div class="dataset-stats flex gap-md items-center text-small">
+            <div><i class="fa-solid fa-hashtag text-gradient-primary"></i> <strong id="visible-features-count">14</strong> Features Loaded</div>
+            <div class="stats-separator">|</div>
+            <div><i class="fa-solid fa-database text-gradient-accent"></i> Format: <strong>CSV</strong></div>
+          </div>
+        </div>
+
+        <!-- Responsive Table Container -->
+        <div class="table-container glass-panel reveal">
+          <table class="features-table" id="features-table">
+            <thead>
+              <tr>
+                <th data-sort="name">Feature <i class="fa-solid fa-sort sort-icon"></i></th>
+                <th data-sort="symbol">Symbol <i class="fa-solid fa-sort sort-icon"></i></th>
+                <th data-sort="type">Type <i class="fa-solid fa-sort sort-icon"></i></th>
+                <th data-sort="range">Clinical Range <i class="fa-solid fa-sort sort-icon"></i></th>
+                <th>Description</th>
+                <th>Clinical Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <!-- Age -->
+              <tr class="feature-row" data-name="Age" data-symbol="age" data-type="Continuous" data-range="29 - 77">
+                <td><strong>Age</strong></td>
+                <td><code class="code-badge">age</code></td>
+                <td><span class="badge badge-secondary">Continuous</span></td>
+                <td><code class="code-badge">29 to 77</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Corresponds directly to patient's calendar age in years.">Patient age in years</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Age acts as a progressive cardiovascular risk factor due to vascular hardening.">Arterial senescence marker</span>
+                </td>
+              </tr>
+
+              <!-- Sex -->
+              <tr class="feature-row" data-name="Sex" data-symbol="sex" data-type="Categorical" data-range="0, 1">
+                <td><strong>Sex</strong></td>
+                <td><code class="code-badge">sex</code></td>
+                <td><span class="badge badge-primary">Categorical</span></td>
+                <td><code class="code-badge">0 = F, 1 = M</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Biological sex categorization. Female = 0, Male = 1.">Patient biological sex</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Hormonal differences and genetic factors create varying prevalence ratios.">Gender risk modifier</span>
+                </td>
+              </tr>
+
+              <!-- Chest Pain Type -->
+              <tr class="feature-row" data-name="Chest Pain Type" data-symbol="cp" data-type="Categorical" data-range="0 - 3">
+                <td><strong>Chest Pain Type</strong></td>
+                <td><code class="code-badge">cp</code></td>
+                <td><span class="badge badge-primary">Categorical</span></td>
+                <td><code class="code-badge">0 to 3</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="0: Typical Angina, 1: Atypical Angina, 2: Non-anginal pain, 3: Asymptomatic.">Chest pain class</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Anginal chest pain indicates coronary ischemia where heart demands exceed supply.">Myocardial ischemia indicator</span>
+                </td>
+              </tr>
+
+              <!-- Resting Blood Pressure -->
+              <tr class="feature-row" data-name="Resting Blood Pressure" data-symbol="trestbps" data-type="Continuous" data-range="94 - 200">
+                <td><strong>Resting BP</strong></td>
+                <td><code class="code-badge">trestbps</code></td>
+                <td><span class="badge badge-secondary">Continuous</span></td>
+                <td><code class="code-badge">94 to 200 mmHg</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Resting blood pressure measured in mm Hg upon clinical intake admission.">Resting BP (mmHg)</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Systolic pressure levels above 130 mmHg suggest varying hypertension phases.">Hypertensive stress index</span>
+                </td>
+              </tr>
+
+              <!-- Serum Cholesterol -->
+              <tr class="feature-row" data-name="Serum Cholesterol" data-symbol="chol" data-type="Continuous" data-range="126 - 564">
+                <td><strong>Cholesterol</strong></td>
+                <td><code class="code-badge">chol</code></td>
+                <td><span class="badge badge-secondary">Continuous</span></td>
+                <td><code class="code-badge">126 to 564 mg/dl</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Serum cholesterol levels in milligrams per deciliter (mg/dl).">Serum cholesterol</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Excess low-density lipoprotein (LDL) contributes directly to arterial plaque buildup.">Atherosclerotic risk marker</span>
+                </td>
+              </tr>
+
+              <!-- Fasting Blood Sugar -->
+              <tr class="feature-row" data-name="Fasting Blood Sugar" data-symbol="fbs" data-type="Categorical" data-range="0, 1">
+                <td><strong>Fasting Blood Sugar</strong></td>
+                <td><code class="code-badge">fbs</code></td>
+                <td><span class="badge badge-primary">Categorical</span></td>
+                <td><code class="code-badge">0 = F, 1 = T</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Fasting blood sugar > 120 mg/dl (1 = true; 0 = false).">FBS > 120 mg/dl</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Diabetes impairs endothelial function and significantly accelerates atherogenesis.">Comorbid diabetic index</span>
+                </td>
+              </tr>
+
+              <!-- Resting ECG Results -->
+              <tr class="feature-row" data-name="Resting ECG" data-symbol="restecg" data-type="Categorical" data-range="0 - 2">
+                <td><strong>Resting ECG</strong></td>
+                <td><code class="code-badge">restecg</code></td>
+                <td><span class="badge badge-primary">Categorical</span></td>
+                <td><code class="code-badge">0 to 2</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="0: Normal, 1: ST-T anomaly, 2: Ventricular hypertrophy.">Electrocardiographic state</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Identifies underlying conduction anomalies, hypertrophic walls, or old infarcts.">Ventricular electrical baseline</span>
+                </td>
+              </tr>
+
+              <!-- Maximum Heart Rate Achieved -->
+              <tr class="feature-row" data-name="Maximum Heart Rate" data-symbol="thalach" data-type="Continuous" data-range="71 - 202">
+                <td><strong>Max Heart Rate</strong></td>
+                <td><code class="code-badge">thalach</code></td>
+                <td><span class="badge badge-secondary">Continuous</span></td>
+                <td><code class="code-badge">71 to 202 BPM</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Maximum heart rate in beats per minute achieved during stress strain test.">Max heart rate reached</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Lower peak heart rates during stress indicate chronological incompetence or poor cardiac reserves.">Chronotropic capacity check</span>
+                </td>
+              </tr>
+
+              <!-- Exercise Induced Angina -->
+              <tr class="feature-row" data-name="Exercise Angina" data-symbol="exang" data-type="Categorical" data-range="0, 1">
+                <td><strong>Exercise Angina</strong></td>
+                <td><code class="code-badge">exang</code></td>
+                <td><span class="badge badge-primary">Categorical</span></td>
+                <td><code class="code-badge">0 = No, 1 = Yes</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Is chest pain triggered by physical stress load? (1 = yes; 0 = no).">Exercise induced angina</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Highly indicative of transient obstructive ischemia during physical strain.">Coronary ischemia flag</span>
+                </td>
+              </tr>
+
+              <!-- Oldpeak (ST Depression) -->
+              <tr class="feature-row" data-name="Oldpeak (ST Depression)" data-symbol="oldpeak" data-type="Continuous" data-range="0.0 - 6.2">
+                <td><strong>Oldpeak</strong></td>
+                <td><code class="code-badge">oldpeak</code></td>
+                <td><span class="badge badge-secondary">Continuous</span></td>
+                <td><code class="code-badge">0.0 to 6.2</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="ST depression induced by exercise relative to resting levels.">ST depression index</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Elevated ST segment depression suggests severe subendocardial ischemia.">Coronary flow reserve depletion</span>
+                </td>
+              </tr>
+
+              <!-- Slope of Peak Exercise ST segment -->
+              <tr class="feature-row" data-name="Peak ST Slope" data-symbol="slope" data-type="Categorical" data-range="0 - 2">
+                <td><strong>Peak ST Slope</strong></td>
+                <td><code class="code-badge">slope</code></td>
+                <td><span class="badge badge-primary">Categorical</span></td>
+                <td><code class="code-badge">0 to 2</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="0: Upsloping, 1: Flat, 2: Downsloping.">Peak ST slope type</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Flat or downsloping behaviors have a high diagnostic value for obstructive ischemia.">Stress conduction behavior</span>
+                </td>
+              </tr>
+
+              <!-- Number of Major Vessels -->
+              <tr class="feature-row" data-name="Colored Major Vessels" data-symbol="ca" data-type="Integer" data-range="0 - 4">
+                <td><strong>Major Vessels (CA)</strong></td>
+                <td><code class="code-badge">ca</code></td>
+                <td><span class="badge badge-success">Integer</span></td>
+                <td><code class="code-badge">0 to 4</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Number of major vessels (0-4) colored by coronary fluoroscopy.">Vessel count (fluoroscopy)</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Directly represents the count of significantly stenosed coronary vessels.">Vascular occlusion density</span>
+                </td>
+              </tr>
+
+              <!-- Thalassemia Result -->
+              <tr class="feature-row" data-name="Thalassemia Stress" data-symbol="thal" data-type="Categorical" data-range="1 - 3">
+                <td><strong>Thalassemia Type</strong></td>
+                <td><code class="code-badge">thal</code></td>
+                <td><span class="badge badge-primary">Categorical</span></td>
+                <td><code class="code-badge">1 = N, 2 = F, 3 = R</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Thalassemia stress scintigraphy perfusion results. 1: Normal, 2: Fixed defect, 3: Reversible defect.">Myocardial perfusion state</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Reversible perfusion defects indicate salvageable myocardium using bypass/stents.">Ischemic defect category</span>
+                </td>
+              </tr>
+
+              <!-- Target Variable -->
+              <tr class="feature-row" data-name="Heart Disease Target" data-symbol="target" data-type="Categorical" data-range="0, 1">
+                <td><strong>Target (Diagnosis)</strong></td>
+                <td><code class="code-badge">target</code></td>
+                <td><span class="badge badge-primary">Categorical</span></td>
+                <td><code class="code-badge">0 = Normal, 1 = Disease</code></td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="Primary binary outcome classification variable.">Diagnostic target flag</span>
+                </td>
+                <td>
+                  <span class="tooltip-trigger" data-tooltip="1 indicates >50% narrowing of major vessels (abnormal coronary angiography).">Diagnostic outcome label</span>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="eda" class="eda-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-secondary">Exploratory Data Analysis</span>
+          <h2 class="text-h1 section-title">Data Insights & Distribution</h2>
+          <p class="text-subheading section-subtitle">
+            Visualizing clinical feature relationships, distribution ranges, and linear correlations before launching machine training.
+          </p>
+        </div>
+
+        <!-- Animated Counter Cards Grid -->
+        <div class="grid grid-4 gap-lg reveal">
+          
+          <!-- Card 1: Records -->
+          <div class="glass-card hover-lift text-center py-lg">
+            <div class="card-icon-header text-gradient-primary">
+              <i class="fa-solid fa-file-waveform"></i>
+            </div>
+            <div class="counter-value text-display my-xs" data-target="1025">0</div>
+            <h4 class="text-h3 text-xs" style="text-transform: uppercase; color: var(--text-secondary);">Total Patient Records</h4>
+          </div>
+
+          <!-- Card 2: Features -->
+          <div class="glass-card hover-lift text-center py-lg">
+            <div class="card-icon-header text-gradient-accent">
+              <i class="fa-solid fa-tags"></i>
+            </div>
+            <div class="counter-value text-display my-xs" data-target="14">0</div>
+            <h4 class="text-h3 text-xs" style="text-transform: uppercase; color: var(--text-secondary);">Structural Features</h4>
+          </div>
+
+          <!-- Card 3: Duplicates -->
+          <div class="glass-card hover-lift text-center py-lg">
+            <div class="card-icon-header text-gradient-primary">
+              <i class="fa-solid fa-copy"></i>
+            </div>
+            <div class="counter-value text-display my-xs" data-target="723">0</div>
+            <h4 class="text-h3 text-xs" style="text-transform: uppercase; color: var(--text-secondary); margin-bottom: 2px;">Duplicates Removed</h4>
+            <div class="text-xs text-muted" style="font-weight: 600;">70.5% Footprint</div>
+          </div>
+
+          <!-- Card 4: Balanced Status -->
+          <div class="glass-card hover-lift text-center py-lg">
+            <div class="card-icon-header text-gradient-accent">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <div class="counter-value text-display my-xs" data-target="100">0</div>
+            <h4 class="text-h3 text-xs" style="text-transform: uppercase; color: var(--text-secondary); margin-bottom: 2px;">Balanced Dataset</h4>
+            <div class="text-xs text-muted" style="font-weight: 600;">51.3% vs 48.7% Classes</div>
+          </div>
+
+        </div>
+
+        <!-- Charts Layout Grid (Chart.js Canvases) -->
+        <div class="grid grid-2 gap-lg reveal" style="margin-top: var(--space-xl);">
+          
+          <!-- Chart Card 1: Pie (Class Balance) -->
+          <div class="glass-card hover-lift">
+            <h3 class="text-h3" style="font-size: 1.1rem; margin-bottom: var(--space-md);">
+              <i class="fa-solid fa-chart-pie text-gradient-primary"></i> Target Label Distribution
+            </h3>
+            <div class="chart-canvas-wrapper" style="position: relative; height: 260px; display: flex; justify-content: center;">
+              <canvas id="chart-class-distribution"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart Card 2: Bar (Chest Pain vs Diagnosis) -->
+          <div class="glass-card hover-lift">
+            <h3 class="text-h3" style="font-size: 1.1rem; margin-bottom: var(--space-md);">
+              <i class="fa-solid fa-chart-bar text-gradient-accent"></i> Chest Pain Type vs Diagnosis
+            </h3>
+            <div class="chart-canvas-wrapper" style="position: relative; height: 260px;">
+              <canvas id="chart-chest-pain"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart Card 3: Histogram (Age Spread) -->
+          <div class="glass-card hover-lift">
+            <h3 class="text-h3" style="font-size: 1.1rem; margin-bottom: var(--space-md);">
+              <i class="fa-solid fa-chart-area text-gradient-primary"></i> Age Distribution Spread
+            </h3>
+            <div class="chart-canvas-wrapper" style="position: relative; height: 260px;">
+              <canvas id="chart-age-distribution"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart Card 4: Scatter (Age vs Heart Rate) -->
+          <div class="glass-card hover-lift">
+            <h3 class="text-h3" style="font-size: 1.1rem; margin-bottom: var(--space-md);">
+              <i class="fa-solid fa-chart-line text-gradient-accent"></i> Age vs Maximum Heart Rate Achieved
+            </h3>
+            <div class="chart-canvas-wrapper" style="position: relative; height: 260px;">
+              <canvas id="chart-age-heartrate"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Custom Correlation Heatmap Card -->
+        <div class="glass-card reveal" style="margin-top: var(--space-xl);">
+          <h3 class="text-h3" style="font-size: 1.1rem; margin-bottom: var(--space-md);">
+            <i class="fa-solid fa-border-all text-gradient-primary"></i> Feature Correlation Matrix (Pearson R)
+          </h3>
+          <p class="text-xs text-muted" style="margin-bottom: var(--space-lg); max-width: 800px;">
+            Heatmap showing positive/negative correlations. ST depression (oldpeak), major vessels colored (ca), and thalassemia (thal) exhibit high correlation multipliers with target outcomes.
+          </p>
+          
+          <div class="heatmap-wrapper">
+            <div class="heatmap-grid">
+              
+              <!-- Matrix Header Row -->
+              <div class="heatmap-cell label-cell"></div>
+              <div class="heatmap-cell label-cell">age</div>
+              <div class="heatmap-cell label-cell">trestbps</div>
+              <div class="heatmap-cell label-cell">chol</div>
+              <div class="heatmap-cell label-cell">thalach</div>
+              <div class="heatmap-cell label-cell">oldpeak</div>
+              <div class="heatmap-cell label-cell">target</div>
+
+              <!-- Row: age -->
+              <div class="heatmap-cell label-cell">age</div>
+              <div class="heatmap-cell value-cell corr-high" style="background-color: rgba(37,99,235,1.0)">1.00</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.28)">0.28</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.21)">0.21</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.40)">-0.40</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.21)">0.21</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.23)">-0.23</div>
+
+              <!-- Row: trestbps -->
+              <div class="heatmap-cell label-cell">trestbps</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.28)">0.28</div>
+              <div class="heatmap-cell value-cell corr-high" style="background-color: rgba(37,99,235,1.0)">1.00</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.12)">0.12</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.05)">-0.05</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.19)">0.19</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.14)">-0.14</div>
+
+              <!-- Row: chol -->
+              <div class="heatmap-cell label-cell">chol</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.21)">0.21</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.12)">0.12</div>
+              <div class="heatmap-cell value-cell corr-high" style="background-color: rgba(37,99,235,1.0)">1.00</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.01)">-0.01</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.05)">0.05</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.09)">-0.09</div>
+
+              <!-- Row: thalach -->
+              <div class="heatmap-cell label-cell">thalach</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.40)">-0.40</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.05)">-0.05</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.01)">-0.01</div>
+              <div class="heatmap-cell value-cell corr-high" style="background-color: rgba(37,99,235,1.0)">1.00</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.34)">-0.34</div>
+              <div class="heatmap-cell value-cell corr-high" style="background-color: rgba(37,99,235,0.42)">0.42</div>
+
+              <!-- Row: oldpeak -->
+              <div class="heatmap-cell label-cell">oldpeak</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.21)">0.21</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.19)">0.19</div>
+              <div class="heatmap-cell value-cell corr-low" style="background-color: rgba(37,99,235,0.05)">0.05</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.34)">-0.34</div>
+              <div class="heatmap-cell value-cell corr-high" style="background-color: rgba(37,99,235,1.0)">1.00</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.43)">-0.43</div>
+
+              <!-- Row: target -->
+              <div class="heatmap-cell label-cell">target</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.23)">-0.23</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.14)">-0.14</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.09)">-0.09</div>
+              <div class="heatmap-cell value-cell corr-high" style="background-color: rgba(37,99,235,0.42)">0.42</div>
+              <div class="heatmap-cell value-cell corr-neg" style="background-color: rgba(239,68,68,0.43)">-0.43</div>
+              <div class="heatmap-cell value-cell corr-high" style="background-color: rgba(37,99,235,1.0)">1.00</div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="cleaning" class="cleaning-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-primary">Data Preprocessing</span>
+          <h2 class="text-h1 section-title">Data Cleaning Timeline</h2>
+          <p class="text-subheading section-subtitle">
+            How raw medical measurements are cleaned and optimized before ingestion into predictive neural models.
+          </p>
+        </div>
+
+        <!-- Vertical Timeline Layout -->
+        <div class="timeline-container reveal">
+          <div class="timeline-axis"></div>
+
+          <!-- Step 1: Duplicate Removal (Left Side) -->
+          <div class="timeline-item left reveal">
+            <div class="timeline-marker text-gradient-primary">
+              <i class="fa-solid fa-clone"></i>
+            </div>
+            <div class="timeline-card glass-panel hover-lift">
+              <span class="badge badge-success timeline-step-badge">Step 1</span>
+              <h3 class="text-h3 my-xs">Duplicate Removal</h3>
+              <p class="text-body text-small">
+                Discovered 723 redundant matching records inside the raw dataset. Removing duplicate rows guarantees that validation subsets remain statistically isolated and avoids artificial inflation of training accuracies.
+              </p>
+              <div class="code-preview my-sm">
+                <code class="code-badge">df.drop_duplicates(inplace=True)</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Outlier Treatment (Right Side) -->
+          <div class="timeline-item right reveal">
+            <div class="timeline-marker text-gradient-accent">
+              <i class="fa-solid fa-filter"></i>
+            </div>
+            <div class="timeline-card glass-panel hover-lift">
+              <span class="badge badge-success timeline-step-badge">Step 2</span>
+              <h3 class="text-h3 my-xs">Outlier Treatment</h3>
+              <p class="text-body text-small">
+                Applied the Interquartile Range (IQR) method to filter physiological anomalies (e.g. cholesterol values exceeding 450 mg/dl and blood pressure levels above 180 mmHg) that represent non-standard medical baselines.
+              </p>
+              <div class="code-preview my-sm">
+                <code class="code-badge">Q1, Q3 = df['chol'].quantile([0.25, 0.75])</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: One-Hot Encoding (Left Side) -->
+          <div class="timeline-item left reveal">
+            <div class="timeline-marker text-gradient-primary">
+              <i class="fa-solid fa-hashtag"></i>
+            </div>
+            <div class="timeline-card glass-panel hover-lift">
+              <span class="badge badge-success timeline-step-badge">Step 3</span>
+              <h3 class="text-h3 my-xs">One-Hot Encoding</h3>
+              <p class="text-body text-small">
+                Transformed multi-class categorical arrays (such as chest pain type `cp` and resting electrocardiographic results `restecg`) into single-column binary indexes to prevent the algorithm from assuming false ordinal rankings.
+              </p>
+              <div class="code-preview my-sm">
+                <code class="code-badge">pd.get_dummies(df, columns=['cp', 'restecg'])</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: MinMaxScaler scaling (Right Side) -->
+          <div class="timeline-item right reveal">
+            <div class="timeline-marker text-gradient-accent">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+            <div class="timeline-card glass-panel hover-lift">
+              <span class="badge badge-success timeline-step-badge">Step 4</span>
+              <h3 class="text-h3 my-xs">MinMax Scaling</h3>
+              <p class="text-body text-small">
+                Normalized continuous vectors (e.g. cholesterol, age, max heart rate achieved) within boundaries of 0 and 1. This prevents variables with large integers from dominating weight coefficients.
+              </p>
+              <div class="code-preview my-sm">
+                <code class="code-badge">MinMaxScaler().fit_transform(X)</code>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="features" class="features-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-secondary">ML Pipeline Optimization</span>
+          <h2 class="text-h1 section-title">Feature Engineering</h2>
+          <p class="text-subheading section-subtitle">
+            Applying clinical domain expertise to synthesize new mathematical parameters, improving predictive accuracy and classification margins.
+          </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid grid-3 gap-lg reveal">
+          
+          <!-- Card 1: Age Group -->
+          <div class="glass-card hover-lift flex flex-col justify-between">
+            <div>
+              <div class="card-icon-header text-gradient-primary">
+                <i class="fa-solid fa-cake-candles"></i>
+              </div>
+              <h3 class="text-h3 my-sm">Age Grouping</h3>
+              <p class="text-xs text-secondary my-sm"><strong>Purpose:</strong> Segments patient ages into discrete life decades to align with age-related vascular hardening thresholds.</p>
+              <p class="text-xs text-secondary my-sm"><strong>Clinical Meaning:</strong> Cardiovascular risk curves display severe non-linear spikes after the fifth decade of life.</p>
+            </div>
+            <div class="code-preview my-xs" style="margin-top: auto;">
+              <code class="code-badge">Age_Group = age // 10</code>
+            </div>
+          </div>
+
+          <!-- Card 2: BP Category -->
+          <div class="glass-card hover-lift flex flex-col justify-between">
+            <div>
+              <div class="card-icon-header text-gradient-accent">
+                <i class="fa-solid fa-gauge"></i>
+              </div>
+              <h3 class="text-h3 my-sm">BP Category</h3>
+              <p class="text-xs text-secondary my-sm"><strong>Purpose:</strong> Categorizes resting blood pressure values into specific clinical hypertension ranges.</p>
+              <p class="text-xs text-secondary my-sm"><strong>Clinical Meaning:</strong> Distinguishes normal pressure from severe Stage 2 hypertensive stress on arterial walls.</p>
+            </div>
+            <div class="code-preview my-xs" style="margin-top: auto;">
+              <code class="code-badge">Bins: [0, 120, 140, 160, 300]</code>
+            </div>
+          </div>
+
+          <!-- Card 3: Cholesterol Category -->
+          <div class="glass-card hover-lift flex flex-col justify-between">
+            <div>
+              <div class="card-icon-header text-gradient-primary">
+                <i class="fa-solid fa-droplet"></i>
+              </div>
+              <h3 class="text-h3 my-sm">Cholesterol Category</h3>
+              <p class="text-xs text-secondary my-sm"><strong>Purpose:</strong> Segments serum cholesterol counts matching AHA cardiological safety guidelines.</p>
+              <p class="text-xs text-secondary my-sm"><strong>Clinical Meaning:</strong> Separates optimal lipoprotein levels from high-risk lipid accumulation thresholds.</p>
+            </div>
+            <div class="code-preview my-xs" style="margin-top: auto;">
+              <code class="code-badge">Bins: [0, 200, 240, 600]</code>
+            </div>
+          </div>
+
+          <!-- Card 4: Multi-Variate Risk Score -->
+          <div class="glass-card hover-lift flex flex-col justify-between">
+            <div>
+              <div class="card-icon-header text-gradient-accent">
+                <i class="fa-solid fa-square-poll-vertical"></i>
+              </div>
+              <h3 class="text-h3 my-sm">Cardiac Risk Score</h3>
+              <p class="text-xs text-secondary my-sm"><strong>Purpose:</strong> Builds an additive baseline index using binary risk indicators from clinical tests.</p>
+              <p class="text-xs text-secondary my-sm"><strong>Clinical Meaning:</strong> Represents cumulative diagnostic indicators pointing towards coronary vascular narrowing.</p>
+            </div>
+            <div class="code-preview my-xs" style="margin-top: auto;">
+              <code class="code-badge">Score = sum(exang + (ca>0) + (oldpeak>1.5))</code>
+            </div>
+          </div>
+
+          <!-- Card 5: Age x Heart Rate Interaction -->
+          <div class="glass-card hover-lift flex flex-col justify-between">
+            <div>
+              <div class="card-icon-header text-gradient-primary">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <h3 class="text-h3 my-sm">Age × Heart Rate</h3>
+              <p class="text-xs text-secondary my-sm"><strong>Purpose:</strong> Analyzes the interaction of age and max cardiovascular capacity during physical stress.</p>
+              <p class="text-xs text-secondary my-sm"><strong>Clinical Meaning:</strong> Elevated combinations in older patients indicate high stress and reduced coronary capacity.</p>
+            </div>
+            <div class="code-preview my-xs" style="margin-top: auto;">
+              <code class="code-badge">Age_HR_Interaction = age * thalach</code>
+            </div>
+          </div>
+
+          <!-- Card 6: Log Oldpeak -->
+          <div class="glass-card hover-lift flex flex-col justify-between">
+            <div>
+              <div class="card-icon-header text-gradient-accent">
+                <i class="fa-solid fa-calculator"></i>
+              </div>
+              <h3 class="text-h3 my-sm">Oldpeak Log</h3>
+              <p class="text-xs text-secondary my-sm"><strong>Purpose:</strong> Log-normalizes right-skewed ST depression values to stabilize classification weights.</p>
+              <p class="text-xs text-secondary my-sm"><strong>Clinical Meaning:</strong> Compresses high-value outlier variances to avoid bias in logistic models.</p>
+            </div>
+            <div class="code-preview my-xs" style="margin-top: auto;">
+              <code class="code-badge">Oldpeak_Log = log(oldpeak + 1)</code>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="models" class="models-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-secondary">Algorithm Showroom</span>
+          <h2 class="text-h1 section-title">Machine Learning Models</h2>
+          <p class="text-subheading section-subtitle">
+            Evaluating six mathematical models trained on physiological baselines. Hover cards to rotate and inspect clinical pros and cons.
+          </p>
+        </div>
+
+        <!-- Flip Cards Grid Layout -->
+        <div class="grid grid-3 gap-xl reveal">
+          
+          <!-- Model 1: Logistic Regression -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              
+              <!-- Front Face -->
+              <div class="flip-card-front glass-panel">
+                <div class="card-icon-header text-gradient-primary">
+                  <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <h3 class="text-h3 my-xs">Logistic Regression</h3>
+                <p class="text-xs text-secondary my-sm">
+                  Evaluates target odds using logistic sigmoids. Superb interpretability baseline models.
+                </p>
+                <div class="metrics-grid my-sm">
+                  <div class="metric-badge"><span class="lbl">ACC:</span> <strong>83.61%</strong></div>
+                  <div class="metric-badge"><span class="lbl">AUC:</span> <strong>88.96%</strong></div>
+                  <div class="metric-badge"><span class="lbl">Time:</span> <strong>2ms</strong></div>
+                </div>
+                <div class="text-xs text-muted" style="margin-top: auto; font-weight: 600;">Hover Card to Flip <i class="fa-solid fa-rotate"></i></div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="flip-card-back glass-panel">
+                <h4 class="text-h3 my-xxs" style="font-size: 1.1rem; color: var(--primary);">Evaluation Details</h4>
+                <div class="pros-cons text-xs text-secondary">
+                  <strong>Advantages:</strong>
+                  <ul>
+                    <li>Highly interpretable weights.</li>
+                    <li>Not prone to overfitting on low dimensions.</li>
+                  </ul>
+                  <strong>Disadvantages:</strong>
+                  <ul>
+                    <li>Assumes linearity in feature boundaries.</li>
+                  </ul>
+                  <strong>Key Predictors:</strong>
+                  <div class="tag-list flex gap-xxs flex-wrap my-xs">
+                    <span class="code-badge">slope</span>
+                    <span class="code-badge">cp</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Model 2: Decision Tree -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              
+              <!-- Front Face -->
+              <div class="flip-card-front glass-panel">
+                <div class="card-icon-header text-gradient-accent">
+                  <i class="fa-solid fa-diagram-project"></i>
+                </div>
+                <h3 class="text-h3 my-xs">Decision Tree</h3>
+                <p class="text-xs text-secondary my-sm">
+                  Iteratively splits data parameters based on Gini Impurity indices. Visual rules mapping.
+                </p>
+                <div class="metrics-grid my-sm">
+                  <div class="metric-badge"><span class="lbl">ACC:</span> <strong>67.21%</strong></div>
+                  <div class="metric-badge"><span class="lbl">AUC:</span> <strong>66.88%</strong></div>
+                  <div class="metric-badge"><span class="lbl">Time:</span> <strong>5ms</strong></div>
+                </div>
+                <div class="text-xs text-muted" style="margin-top: auto; font-weight: 600;">Hover Card to Flip <i class="fa-solid fa-rotate"></i></div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="flip-card-back glass-panel">
+                <h4 class="text-h3 my-xxs" style="font-size: 1.1rem; color: var(--secondary);">Evaluation Details</h4>
+                <div class="pros-cons text-xs text-secondary">
+                  <strong>Advantages:</strong>
+                  <ul>
+                    <li>Easy visual inspection layout maps.</li>
+                    <li>No feature scaling required.</li>
+                  </ul>
+                  <strong>Disadvantages:</strong>
+                  <ul>
+                    <li>High variance, sensitive to slight shifts.</li>
+                  </ul>
+                  <strong>Key Predictors:</strong>
+                  <div class="tag-list flex gap-xxs flex-wrap my-xs">
+                    <span class="code-badge">thalach</span>
+                    <span class="code-badge">ca</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Model 3: Random Forest -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              
+              <!-- Front Face -->
+              <div class="flip-card-front glass-panel">
+                <div class="card-icon-header text-gradient-primary">
+                  <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3 class="text-h3 my-xs">Random Forest</h3>
+                <p class="text-xs text-secondary my-sm">
+                  Ensembles independent decision trees with bootstrap aggregation to reduce variance.
+                </p>
+                <div class="metrics-grid my-sm">
+                  <div class="metric-badge"><span class="lbl">ACC:</span> <strong>81.97%</strong></div>
+                  <div class="metric-badge"><span class="lbl">AUC:</span> <strong>88.10%</strong></div>
+                  <div class="metric-badge"><span class="lbl">Time:</span> <strong>45ms</strong></div>
+                </div>
+                <div class="text-xs text-muted" style="margin-top: auto; font-weight: 600;">Hover Card to Flip <i class="fa-solid fa-rotate"></i></div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="flip-card-back glass-panel">
+                <h4 class="text-h3 my-xxs" style="font-size: 1.1rem; color: var(--primary);">Evaluation Details</h4>
+                <div class="pros-cons text-xs text-secondary">
+                  <strong>Advantages:</strong>
+                  <ul>
+                    <li>High diagnostic accuracy coefficients.</li>
+                    <li>Protects against overfitting spikes.</li>
+                  </ul>
+                  <strong>Disadvantages:</strong>
+                  <ul>
+                    <li>Higher computational training footprint.</li>
+                  </ul>
+                  <strong>Key Predictors:</strong>
+                  <div class="tag-list flex gap-xxs flex-wrap my-xs">
+                    <span class="code-badge">ca</span>
+                    <span class="code-badge">cp</span>
+                    <span class="code-badge">oldpeak</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Model 4: KNN -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              
+              <!-- Front Face -->
+              <div class="flip-card-front glass-panel">
+                <div class="card-icon-header text-gradient-accent">
+                  <i class="fa-solid fa-people-arrows"></i>
+                </div>
+                <h3 class="text-h3 my-xs">K-Nearest Neighbors</h3>
+                <p class="text-xs text-secondary my-sm">
+                  Classifies based on spatial proximity distance metrics in continuous feature dimensions.
+                </p>
+                <div class="metrics-grid my-sm">
+                  <div class="metric-badge"><span class="lbl">ACC:</span> <strong>78.69%</strong></div>
+                  <div class="metric-badge"><span class="lbl">AUC:</span> <strong>87.34%</strong></div>
+                  <div class="metric-badge"><span class="lbl">Time:</span> <strong>12ms</strong></div>
+                </div>
+                <div class="text-xs text-muted" style="margin-top: auto; font-weight: 600;">Hover Card to Flip <i class="fa-solid fa-rotate"></i></div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="flip-card-back glass-panel">
+                <h4 class="text-h3 my-xxs" style="font-size: 1.1rem; color: var(--secondary);">Evaluation Details</h4>
+                <div class="pros-cons text-xs text-secondary">
+                  <strong>Advantages:</strong>
+                  <ul>
+                    <li>Simple, non-parametric boundary mapping.</li>
+                    <li>Adapts instantly to new database rows.</li>
+                  </ul>
+                  <strong>Disadvantages:</strong>
+                  <ul>
+                    <li>Sensitive to scaling and noisy features.</li>
+                  </ul>
+                  <strong>Key Predictors:</strong>
+                  <div class="tag-list flex gap-xxs flex-wrap my-xs">
+                    <span class="code-badge">thalach</span>
+                    <span class="code-badge">chol</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Model 5: Naive Bayes (BEST MODEL) -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              
+              <!-- Front Face -->
+              <div class="flip-card-front glass-panel" style="border-color: var(--accent);">
+                <div class="card-icon-header text-gradient-primary">
+                  <i class="fa-solid fa-bezier-curve"></i>
+                </div>
+                <h3 class="text-h3 my-xs" style="display: flex; align-items: center; gap: 6px; justify-content: center;">
+                  Naive Bayes <span class="badge badge-success flex items-center gap-xxs" style="font-size: 0.55rem; padding: 0.1rem 0.4rem; vertical-align: middle;"><i class="fa-solid fa-crown"></i> Best</span>
+                </h3>
+                <p class="text-xs text-secondary my-sm">
+                  Computes probability metrics using Bayes Theorem under strict feature independence.
+                </p>
+                <div class="metrics-grid my-sm">
+                  <div class="metric-badge bg-accent" style="background-color: var(--accent-glow); color: var(--accent);"><span class="lbl">ACC:</span> <strong>83.61%</strong></div>
+                  <div class="metric-badge"><span class="lbl">AUC:</span> <strong>89.83%</strong></div>
+                  <div class="metric-badge"><span class="lbl">Time:</span> <strong>1ms</strong></div>
+                </div>
+                <div class="text-xs text-muted" style="margin-top: auto; font-weight: 600;">Hover Card to Flip <i class="fa-solid fa-rotate"></i></div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="flip-card-back glass-panel">
+                <h4 class="text-h3 my-xxs" style="font-size: 1.1rem; color: var(--primary);">Evaluation Details</h4>
+                <div class="pros-cons text-xs text-secondary">
+                  <strong>Advantages:</strong>
+                  <ul>
+                    <li>Runs instantly with minor data storage rules.</li>
+                    <li>Performs well on multi-class inputs.</li>
+                  </ul>
+                  <strong>Disadvantages:</strong>
+                  <ul>
+                    <li>Assumes features are completely independent.</li>
+                  </ul>
+                  <strong>Key Predictors:</strong>
+                  <div class="tag-list flex gap-xxs flex-wrap my-xs">
+                    <span class="code-badge">fbs</span>
+                    <span class="code-badge">sex</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Model 6: XGBoost -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              
+              <!-- Front Face -->
+              <div class="flip-card-front glass-panel">
+                <div class="card-icon-header text-gradient-accent">
+                  <i class="fa-solid fa-bolt-lightning"></i>
+                </div>
+                <h3 class="text-h3 my-xs">XGBoost</h3>
+                <p class="text-xs text-secondary my-sm">
+                  Iteratively optimizes losses using sequential tree-boosting gradient descent.
+                </p>
+                <div class="metrics-grid my-sm">
+                  <div class="metric-badge"><span class="lbl">ACC:</span> <strong>81.97%</strong></div>
+                  <div class="metric-badge"><span class="lbl">AUC:</span> <strong>85.06%</strong></div>
+                  <div class="metric-badge"><span class="lbl">Time:</span> <strong>85ms</strong></div>
+                </div>
+                <div class="text-xs text-muted" style="margin-top: auto; font-weight: 600;">Hover Card to Flip <i class="fa-solid fa-rotate"></i></div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="flip-card-back glass-panel">
+                <h4 class="text-h3 my-xxs" style="font-size: 1.1rem; color: var(--secondary);">Evaluation Details</h4>
+                <div class="pros-cons text-xs text-secondary">
+                  <strong>Advantages:</strong>
+                  <ul>
+                    <li>State-of-the-art predictive accuracy score.</li>
+                    <li>L1/L2 regularization prevents overfitting.</li>
+                  </ul>
+                  <strong>Disadvantages:</strong>
+                  <ul>
+                    <li>Complex hyperparameter fine-tuning is required.</li>
+                  </ul>
+                  <strong>Key Predictors:</strong>
+                  <div class="tag-list flex gap-xxs flex-wrap my-xs">
+                    <span class="code-badge">ca</span>
+                    <span class="code-badge">oldpeak</span>
+                    <span class="code-badge">thal</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Model Comparison Section -->
+    <section id="comparison" class="comparison-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-primary">Model Benchmarking</span>
+          <h2 class="text-h1 section-title">Model Performance Comparison</h2>
+          <p class="text-subheading section-subtitle">
+            A comprehensive matrix evaluating key machine learning parameters. Toggle options to filter the highest-rated diagnostics models.
+          </p>
+        </div>
+
+        <!-- Interactive Filters Bar -->
+        <div class="comparison-toolbar flex justify-between items-center glass-panel reveal my-md" style="padding: var(--space-md) var(--space-lg); border-radius: var(--radius-md);">
+          <div class="btn-group flex gap-sm">
+            <button class="btn btn-outline btn-sm active" id="btn-comp-all" style="padding: 0.5rem 1.2rem;">All Models</button>
+            <button class="btn btn-outline btn-sm" id="btn-comp-top" style="padding: 0.5rem 1.2rem;"><i class="fa-solid fa-trophy text-gradient-accent"></i> Top Predictors</button>
+            <button class="btn btn-outline btn-sm" id="btn-comp-best" style="padding: 0.5rem 1.2rem;"><i class="fa-solid fa-star text-gradient-primary"></i> Best Model Only</button>
+          </div>
+          <div class="text-small text-secondary">
+            * Evaluated on test fold arrays (14-parameter Cleveland vector)
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="table-container glass-panel reveal" style="border-radius: var(--radius-lg); overflow-x: auto;">
+          <table class="comparison-table" id="comparison-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="background: rgba(var(--surface-raw), 0.5); border-bottom: 1.5px solid var(--border-color);">
+                <th style="padding: var(--space-md) var(--space-lg); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--text-secondary); text-transform: uppercase;">Classifier</th>
+                <th style="padding: var(--space-md) var(--space-lg); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--text-secondary); text-transform: uppercase;">Accuracy</th>
+                <th style="padding: var(--space-md) var(--space-lg); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--text-secondary); text-transform: uppercase;">Precision</th>
+                <th style="padding: var(--space-md) var(--space-lg); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--text-secondary); text-transform: uppercase;">Recall</th>
+                <th style="padding: var(--space-md) var(--space-lg); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--text-secondary); text-transform: uppercase;">F1-Score</th>
+                <th style="padding: var(--space-md) var(--space-lg); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--text-secondary); text-transform: uppercase;">ROC AUC</th>
+                <th style="padding: var(--space-md) var(--space-lg); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--text-secondary); text-transform: uppercase;">Train Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <!-- Naive Bayes (BEST MODEL) -->
+              <tr class="comp-row best-model-row" data-rank="1" data-best="true">
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">
+                  <strong style="display: flex; align-items: center; gap: var(--space-xs);">
+                    Naive Bayes <span class="badge badge-success flex items-center gap-xxs" style="font-size: 0.6rem; padding: 0.15rem 0.5rem;"><i class="fa-solid fa-crown"></i> Best</span>
+                  </strong>
+                </td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color); font-weight: 700; color: var(--accent);">83.61%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color); font-weight: 700; color: var(--accent);">87.10%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color); font-weight: 700; color: var(--accent);">81.82%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color); font-weight: 700; color: var(--accent);">84.38%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color); font-weight: 700; color: var(--accent);">89.83%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);"><code class="code-badge" style="background-color: var(--accent-glow); color: var(--accent);">0.001s</code></td>
+              </tr>
+
+              <!-- Logistic Regression -->
+              <tr class="comp-row" data-rank="2" data-best="false">
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">
+                  <strong>Logistic Regression</strong>
+                </td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">83.61%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">84.85%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">84.85%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">84.85%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">88.96%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);"><code class="code-badge">0.002s</code></td>
+              </tr>
+
+              <!-- Random Forest -->
+              <tr class="comp-row" data-rank="3" data-best="false">
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">
+                  <strong>Random Forest</strong>
+                </td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">81.97%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">82.35%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">84.85%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">83.58%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">88.10%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);"><code class="code-badge">0.045s</code></td>
+              </tr>
+
+              <!-- KNN -->
+              <tr class="comp-row" data-rank="4" data-best="false">
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">
+                  <strong>K-Nearest Neighbors</strong>
+                </td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">78.69%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">79.41%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">81.82%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">80.60%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">87.34%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);"><code class="code-badge">0.012s</code></td>
+              </tr>
+
+              <!-- XGBoost -->
+              <tr class="comp-row" data-rank="5" data-best="false">
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">
+                  <strong>XGBoost</strong>
+                </td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">81.97%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">84.38%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">81.82%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">83.08%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">85.06%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);"><code class="code-badge">0.085s</code></td>
+              </tr>
+
+              <!-- Decision Tree -->
+              <tr class="comp-row" data-rank="6" data-best="false">
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">
+                  <strong>Decision Tree</strong>
+                </td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">67.21%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">72.41%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">63.64%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">67.74%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);">66.88%</td>
+                <td style="padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color);"><code class="code-badge">0.005s</code></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="prediction" class="prediction-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-primary">AI Diagnostic Intake</span>
+          <h2 class="text-h1 section-title">Patient Diagnostic Form</h2>
+          <p class="text-subheading section-subtitle">
+            Enter patient physiological measurements. The AI model will evaluate parameters against the Cleveland matrix.
+          </p>
+        </div>
+
+        <div class="glass-card reveal" style="max-width: 900px; margin: 0 auto; padding: var(--space-xl);">
+          <form id="prediction-form" novalidate>
+            
+            <!-- Category 1: Patient Demographics & Vitals -->
+            <h3 class="text-h3" style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: var(--space-md); color: var(--primary);">
+              <i class="fa-solid fa-user-doctor"></i> Demographics & Baseline Vitals
+            </h3>
+            <div class="grid grid-3 gap-md">
+              
+              <!-- Age -->
+              <div class="form-group">
+                <label for="pred-age" class="form-label">Age (Years) *</label>
+                <div class="input-wrapper">
+                  <input type="number" id="pred-age" class="input-field" placeholder="e.g. 55" required min="1" max="120">
+                  <i class="fa-solid fa-calendar-days input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Gender -->
+              <div class="form-group">
+                <label for="pred-sex" class="form-label">Biological Sex *</label>
+                <div class="input-wrapper">
+                  <select id="pred-sex" class="input-field" required>
+                    <option value="" disabled selected>Select sex</option>
+                    <option value="0">Female (0)</option>
+                    <option value="1">Male (1)</option>
+                  </select>
+                  <i class="fa-solid fa-venus-mars input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Resting BP -->
+              <div class="form-group">
+                <label for="pred-trestbps" class="form-label">Resting BP (mmHg) *</label>
+                <div class="input-wrapper">
+                  <input type="number" id="pred-trestbps" class="input-field" placeholder="e.g. 120" required min="50" max="250">
+                  <i class="fa-solid fa-gauge-high input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Cholesterol -->
+              <div class="form-group">
+                <label for="pred-chol" class="form-label">Serum Chol (mg/dl) *</label>
+                <div class="input-wrapper">
+                  <input type="number" id="pred-chol" class="input-field" placeholder="e.g. 200" required min="80" max="600">
+                  <i class="fa-solid fa-droplet input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Fasting Blood Sugar -->
+              <div class="form-group">
+                <label for="pred-fbs" class="form-label">Fasting Sugar > 120 mg/dl *</label>
+                <div class="input-wrapper">
+                  <select id="pred-fbs" class="input-field" required>
+                    <option value="" disabled selected>Select level</option>
+                    <option value="0">False (0)</option>
+                    <option value="1">True (1)</option>
+                  </select>
+                  <i class="fa-solid fa-kit-medical input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Resting ECG -->
+              <div class="form-group">
+                <label for="pred-restecg" class="form-label">Resting ECG Baseline *</label>
+                <div class="input-wrapper">
+                  <select id="pred-restecg" class="input-field" required>
+                    <option value="" disabled selected>Select ECG State</option>
+                    <option value="0">Normal (0)</option>
+                    <option value="1">ST-T Wave Abnormality (1)</option>
+                    <option value="2">Left Ventricular Hypertrophy (2)</option>
+                  </select>
+                  <i class="fa-solid fa-wave-square input-icon"></i>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Category 2: Cardiac Stress Tests -->
+            <h3 class="text-h3" style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-top: var(--space-lg); margin-bottom: var(--space-md); color: var(--secondary);">
+              <i class="fa-solid fa-heart-pulse"></i> Stress Test & Coronary Parameters
+            </h3>
+            <div class="grid grid-3 gap-md">
+              
+              <!-- Chest Pain Type -->
+              <div class="form-group">
+                <label for="pred-cp" class="form-label">Chest Pain Category *</label>
+                <div class="input-wrapper">
+                  <select id="pred-cp" class="input-field" required>
+                    <option value="" disabled selected>Select pain type</option>
+                    <option value="0">Typical Angina (0)</option>
+                    <option value="1">Atypical Angina (1)</option>
+                    <option value="2">Non-Anginal Pain (2)</option>
+                    <option value="3">Asymptomatic (3)</option>
+                  </select>
+                  <i class="fa-solid fa-heart-crack input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Max Heart Rate -->
+              <div class="form-group">
+                <label for="pred-thalach" class="form-label">Max HR Achieved (BPM) *</label>
+                <div class="input-wrapper">
+                  <input type="number" id="pred-thalach" class="input-field" placeholder="e.g. 150" required min="50" max="220">
+                  <i class="fa-solid fa-heart-pulse input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Exercise Angina -->
+              <div class="form-group">
+                <label for="pred-exang" class="form-label">Exercise Angina *</label>
+                <div class="input-wrapper">
+                  <select id="pred-exang" class="input-field" required>
+                    <option value="" disabled selected>Select status</option>
+                    <option value="0">No (0)</option>
+                    <option value="1">Yes (1)</option>
+                  </select>
+                  <i class="fa-solid fa-hand-holding-medical input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Oldpeak -->
+              <div class="form-group">
+                <label for="pred-oldpeak" class="form-label">ST Depression (Oldpeak) *</label>
+                <div class="input-wrapper">
+                  <input type="number" id="pred-oldpeak" class="input-field" placeholder="e.g. 1.5" required step="0.1" min="0" max="10">
+                  <i class="fa-solid fa-arrows-down-to-line input-icon"></i>
+                </div>
+              </div>
+
+              <!-- ST Slope -->
+              <div class="form-group">
+                <label for="pred-slope" class="form-label">Peak Exercise ST Slope *</label>
+                <div class="input-wrapper">
+                  <select id="pred-slope" class="input-field" required>
+                    <option value="" disabled selected>Select slope</option>
+                    <option value="0">Upsloping (0)</option>
+                    <option value="1">Flat (1)</option>
+                    <option value="2">Downsloping (2)</option>
+                  </select>
+                  <i class="fa-solid fa-chart-line input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Major Vessels CA -->
+              <div class="form-group">
+                <label for="pred-ca" class="form-label">Fluoroscopy Vessels (CA) *</label>
+                <div class="input-wrapper">
+                  <select id="pred-ca" class="input-field" required>
+                    <option value="" disabled selected>Select vessel count</option>
+                    <option value="0">0 major vessels colored</option>
+                    <option value="1">1 major vessel colored</option>
+                    <option value="2">2 major vessels colored</option>
+                    <option value="3">3 major vessels colored</option>
+                    <option value="4">4 major vessels colored</option>
+                  </select>
+                  <i class="fa-solid fa-circle-nodes input-icon"></i>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Row 3: Thalassemia (Sits full width or centered) -->
+            <div class="grid grid-3 gap-md" style="margin-top: var(--space-sm);">
+              <div class="form-group">
+                <label for="pred-thal" class="form-label">Thalassemia Scintigraphy *</label>
+                <div class="input-wrapper">
+                  <select id="pred-thal" class="input-field" required>
+                    <option value="" disabled selected>Select defect type</option>
+                    <option value="1">Normal (1)</option>
+                    <option value="2">Fixed Defect (2)</option>
+                    <option value="3">Reversible Defect (3)</option>
+                  </select>
+                  <i class="fa-solid fa-vials input-icon"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Alerts Banner -->
+            <div id="prediction-alert" class="alert-box alert-danger hidden" style="margin-top: var(--space-md); padding: var(--space-sm); border-radius: var(--radius-sm); font-size: var(--fs-small);">
+              <i class="fa-solid fa-triangle-exclamation"></i> <span class="alert-message"></span>
+            </div>
+
+            <!-- Submit and Reset Toolbar -->
+            <div class="form-actions flex gap-md items-center justify-end" style="margin-top: var(--space-lg); border-top: 1px solid var(--border-color); padding-top: var(--space-md);">
+              <button type="reset" class="btn btn-outline" id="btn-pred-reset" style="padding: 0.75rem 2rem;">
+                <i class="fa-solid fa-arrows-rotate"></i> Clear Form
+              </button>
+              <button type="submit" class="btn btn-primary" id="btn-pred-submit" style="padding: 0.75rem 2rem;">
+                <i class="fa-solid fa-brain"></i> Compute Risk Matrix
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="dashboard" class="dashboard-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-secondary">AI Diagnostic Outcomes</span>
+          <h2 class="text-h1 section-title">Real-Time Risk Analysis</h2>
+          <p class="text-subheading section-subtitle">
+            Diagnostics computed by the Naive Bayes algorithm. Submit patient intake form parameters above to view outcomes.
+          </p>
+        </div>
+
+        <!-- Initial Placeholder State (Before form submit) -->
+        <div class="glass-card text-center py-huge reveal" id="comp-placeholder-card">
+          <div class="card-icon-header text-gradient-primary" style="margin-bottom: var(--space-sm);">
+            <i class="fa-solid fa-microchip fa-pulse"></i>
+          </div>
+          <h3 class="text-h3 my-sm">Awaiting Intake Submission</h3>
+          <p class="text-body text-secondary" style="max-width: 500px; margin: 0 auto; font-size: var(--fs-small);">
+            Please complete the patient intake form in the section above and click "Compute Risk Matrix" to run neural network assessments.
+          </p>
+        </div>
+
+        <!-- AI Processing Loader Overlay (Initially Hidden) -->
+        <div class="glass-card text-center py-huge hidden" id="comp-loader-card">
+          <div class="loader-pulse-ring" style="margin-bottom: var(--space-md); display: flex; justify-content: center; align-items: center;">
+            <i class="fa-solid fa-brain loader-brain-icon text-gradient-primary" style="font-size: 3rem;"></i>
+          </div>
+          <h3 class="text-h3 my-sm">Executing Neural Assessment...</h3>
+          <div class="progress-bar-wrapper my-md" style="max-width: 300px; margin: 20px auto; background: var(--border-color); height: 6px; border-radius: var(--radius-full); overflow: hidden; position: relative;">
+            <div class="progress-bar-fill" id="comp-loader-progress" style="width: 0%; height: 100%; background: var(--primary); transition: width 0.1s linear; position: absolute; left: 0; top: 0;"></div>
+          </div>
+          <p class="text-xs text-muted" id="comp-loader-status">Mapping continuous feature weights...</p>
+        </div>
+
+        <!-- Animated Results Diagnostic Card (Initially Hidden) -->
+        <div class="grid grid-2 gap-lg hidden" id="comp-results-card" style="align-items: stretch;">
+          
+          <!-- Column 1: Core Metrics Panel -->
+          <div class="glass-card flex flex-col justify-between" id="results-main-panel" style="border-color: var(--danger); box-shadow: 0 0 25px rgba(239, 68, 68, 0.1); display: flex; flex-direction: column;">
+            
+            <!-- Emergency Alert Badge -->
+            <div class="flex justify-between items-center" style="margin-bottom: var(--space-md); flex-wrap: wrap; gap: var(--space-xs);">
+              <span class="badge badge-danger flex items-center gap-xxs" id="res-badge-danger" style="font-weight: 700; font-size: 0.65rem; padding: 0.25rem 0.6rem;">
+                <i class="fa-solid fa-triangle-exclamation"></i> EMERGENCY ACTION RECOMMENDED
+              </span>
+              <span class="badge badge-success flex items-center gap-xxs hidden" id="res-badge-safe" style="font-weight: 700; font-size: 0.65rem; padding: 0.25rem 0.6rem;">
+                <i class="fa-solid fa-circle-check"></i> CLINICAL BASELINE STABLE
+              </span>
+              <div class="text-xs text-muted">Diagnostic ID: <strong id="res-diag-id">#HP-8902</strong></div>
+            </div>
+
+            <!-- Circular Progress Loader + Disease Probability -->
+            <div class="flex items-center gap-lg my-md" style="flex-wrap: wrap;">
+              <div class="circular-progress-wrapper" style="position: relative; width: 140px; height: 140px; flex-shrink: 0;">
+                <svg width="140" height="140" viewBox="0 0 140 140">
+                  <circle cx="70" cy="70" r="58" class="circle-bg" stroke="var(--border-color)" stroke-width="12" fill="transparent"/>
+                  <circle cx="70" cy="70" r="58" class="circle-fill" id="res-progress-circle" stroke="var(--danger)" stroke-width="12" fill="transparent" stroke-dasharray="364.4" stroke-dashoffset="364.4" style="transform: rotate(-90deg); transform-origin: 70px 70px; transition: stroke-dashoffset 1.5s ease-out;"/>
+                </svg>
+                <div class="circular-progress-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                  <span class="text-display" id="res-prob-val" style="font-size: 1.8rem; line-height: 1; color: var(--danger); font-weight: 700;">0%</span>
+                  <div class="text-xs text-muted" style="font-weight: 600;">Probability</div>
+                </div>
+              </div>
+
+              <!-- General Stats -->
+              <div class="stats-panel flex-1">
+                <div class="flex justify-between items-center border-b py-xs" style="border-bottom: 1px solid var(--border-color); padding: var(--space-xs) 0;">
+                  <span class="text-secondary text-small">Diagnostic Risk:</span>
+                  <strong class="text-gradient-primary" id="res-risk-level" style="font-size: 1rem;">HIGH RISK</strong>
+                </div>
+                <div class="flex justify-between items-center border-b py-xs" style="border-bottom: 1px solid var(--border-color); padding: var(--space-xs) 0;">
+                  <span class="text-secondary text-small">Inference Confidence:</span>
+                  <strong class="text-gradient-accent" id="res-confidence">94.2% (High)</strong>
+                </div>
+                <div class="flex justify-between items-center py-xs" style="padding: var(--space-xs) 0;">
+                  <span class="text-secondary text-small">Risk Markers Score:</span>
+                  <strong id="res-risk-score" style="color: var(--danger); font-weight: 700;">4 / 5 Factors</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Natural Language Explanation -->
+            <div class="report-explanation my-md" id="res-explanation-box" style="background: rgba(var(--surface-raw), 0.35); border-radius: var(--radius-sm); padding: var(--space-md); border-left: 4px solid var(--danger); margin-top: var(--space-md);">
+              <h4 class="text-h3" style="font-size: 0.9rem; margin-bottom: var(--space-xs); display: flex; align-items: center; gap: var(--space-xs);"><i class="fa-solid fa-file-medical"></i> Neural Interpretation Report</h4>
+              <p class="text-xs text-secondary" id="res-explanation" style="line-height: 1.5;">
+                Assessment complete. The predictive engine identified elevated cardiac hazard boundaries. Significant stenosis markers are present inside coronary artery fluoroscopy segments, exacerbated by exercise angina conduction depression.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Column 2: Clinical Recommendations & Feature Importance -->
+          <div class="glass-card flex flex-col justify-between" style="display: flex; flex-direction: column;">
+            <div>
+              <h3 class="text-h3" style="font-size: 1.1rem; margin-bottom: var(--space-sm);">
+                <i class="fa-solid fa-chart-column text-gradient-accent"></i> Local Feature Impact (SHAP Values)
+              </h3>
+              
+              <!-- Local Feature Importance Bar Graph -->
+              <div class="chart-canvas-wrapper" style="position: relative; height: 180px;">
+                <canvas id="chart-local-importance"></canvas>
+              </div>
+            </div>
+
+            <!-- Clinical Recommendations List -->
+            <div class="recommendations-box my-sm" style="margin-top: var(--space-md);">
+              <h4 class="text-h3" style="font-size: 0.95rem; margin-bottom: var(--space-xs); color: var(--text-primary);">
+                <i class="fa-solid fa-list-check text-gradient-primary"></i> Prescriptive Recommendations
+              </h4>
+              <ul class="text-xs text-secondary flex flex-col gap-xs" id="res-rec-list" style="padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-xs);">
+                <li class="flex gap-xs" style="display: flex; align-items: flex-start; gap: var(--space-xs);"><i class="fa-solid fa-hand-holding-hand text-danger" style="margin-top: 2px;"></i> Direct patient to clinical coronary angiography mapping immediately.</li>
+                <li class="flex gap-xs" style="display: flex; align-items: flex-start; gap: var(--space-xs);"><i class="fa-solid fa-circle-exclamation text-warning" style="margin-top: 2px;"></i> Prescribe immediate nitroglycerin refills and schedule echocardiography testing.</li>
+                <li class="flex gap-xs" style="display: flex; align-items: flex-start; gap: var(--space-xs);"><i class="fa-solid fa-shield-halved text-success" style="margin-top: 2px;"></i> Restrict max cardiovascular exercise loads to standard thresholds.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Section Divider / Sub-header -->
+        <h3 class="text-h3 reveal" style="margin-top: var(--space-xl); margin-bottom: var(--space-md); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-size: 1.25rem;">
+          <i class="fa-solid fa-chart-line text-gradient-primary"></i> Best Model Performance Verification (Naive Bayes)
+        </h3>
+        <p class="text-subheading reveal" style="font-size: var(--fs-small); margin-bottom: var(--space-lg); max-width: 800px;">
+          Global validation parameters calculated during the model's training phase. These metrics ensure clinical reliability before patient-level inference runs.
+        </p>
+
+        <!-- Mini Stats Grid -->
+        <div class="grid grid-6 gap-md reveal" style="margin-bottom: var(--space-lg);">
+          
+          <!-- Accuracy -->
+          <div class="glass-card text-center py-sm" style="padding: var(--space-sm);">
+            <span class="text-xs text-muted" style="text-transform: uppercase;">Accuracy</span>
+            <div class="text-h2" style="font-size: 1.5rem; color: var(--accent); font-weight: 700; margin-top: 4px;">83.61%</div>
+          </div>
+
+          <!-- Precision -->
+          <div class="glass-card text-center py-sm" style="padding: var(--space-sm);">
+            <span class="text-xs text-muted" style="text-transform: uppercase;">Precision</span>
+            <div class="text-h2" style="font-size: 1.5rem; color: var(--text-primary); font-weight: 700; margin-top: 4px;">87.10%</div>
+          </div>
+
+          <!-- Recall -->
+          <div class="glass-card text-center py-sm" style="padding: var(--space-sm);">
+            <span class="text-xs text-muted" style="text-transform: uppercase;">Recall</span>
+            <div class="text-h2" style="font-size: 1.5rem; color: var(--text-primary); font-weight: 700; margin-top: 4px;">81.82%</div>
+          </div>
+
+          <!-- F1-Score -->
+          <div class="glass-card text-center py-sm" style="padding: var(--space-sm);">
+            <span class="text-xs text-muted" style="text-transform: uppercase;">F1-Score</span>
+            <div class="text-h2" style="font-size: 1.5rem; color: var(--text-primary); font-weight: 700; margin-top: 4px;">84.38%</div>
+          </div>
+
+          <!-- Train Time -->
+          <div class="glass-card text-center py-sm" style="padding: var(--space-sm);">
+            <span class="text-xs text-muted" style="text-transform: uppercase;">Train Time</span>
+            <div class="text-h2" style="font-size: 1.5rem; color: var(--primary); font-weight: 700; margin-top: 4px;">1ms</div>
+          </div>
+
+          <!-- Inference Time -->
+          <div class="glass-card text-center py-sm" style="padding: var(--space-sm);">
+            <span class="text-xs text-muted" style="text-transform: uppercase;">Inference</span>
+            <div class="text-h2" style="font-size: 1.5rem; color: var(--primary); font-weight: 700; margin-top: 4px;">1.2ms</div>
+          </div>
+
+        </div>
+
+        <!-- Confusion Matrix & ROC Curve Panels -->
+        <div class="grid grid-2 gap-lg reveal" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg);">
+          
+          <!-- Column 1: Confusion Matrix layout -->
+          <div class="glass-card">
+            <h3 class="text-h3" style="font-size: 1.1rem; margin-bottom: var(--space-md);">
+              <i class="fa-solid fa-border-all text-gradient-primary"></i> Confusion Matrix (Naive Bayes)
+            </h3>
+            
+            <div class="confusion-matrix-wrapper" style="margin: var(--space-md) auto; max-width: 320px;">
+              <div class="confusion-matrix-grid">
+                
+                <!-- Headers -->
+                <div class="matrix-label"></div>
+                <div class="matrix-header-cell">Pred Normal</div>
+                <div class="matrix-header-cell">Pred Disease</div>
+
+                <!-- Row 1: Actual Normal -->
+                <div class="matrix-row-label">Act Normal</div>
+                <div class="matrix-val-cell hit-cell">
+                  <span class="val">142</span>
+                  <span class="lbl">True Negative</span>
+                </div>
+                <div class="matrix-val-cell miss-cell">
+                  <span class="val">16</span>
+                  <span class="lbl">False Positive</span>
+                </div>
+
+                <!-- Row 2: Actual Disease -->
+                <div class="matrix-row-label">Act Disease</div>
+                <div class="matrix-val-cell miss-cell">
+                  <span class="val">21</span>
+                  <span class="lbl">False Negative</span>
+                </div>
+                <div class="matrix-val-cell hit-cell" style="background-color: rgba(37,99,235,0.18); border-color: var(--primary);">
+                  <span class="val" style="color: var(--primary);">124</span>
+                  <span class="lbl" style="color: var(--primary);">True Positive</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: ROC Curve Graph using Chart.js -->
+          <div class="glass-card">
+            <h3 class="text-h3" style="font-size: 1.1rem; margin-bottom: var(--space-md);">
+              <i class="fa-solid fa-chart-line text-gradient-accent"></i> ROC Curve (Area Under Curve = 89.83%)
+            </h3>
+            <div class="chart-canvas-wrapper" style="position: relative; height: 260px;">
+              <canvas id="chart-roc-curve"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Printable Patient Report Section -->
+    <section id="patient-report" class="report-section py-huge hidden">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-primary">Clinical Documentation</span>
+          <h2 class="text-h1 section-title">Printable Diagnostic Report</h2>
+          <p class="text-subheading section-subtitle">
+            Generate and export patient clinical documentation. This sheet conforms to standard hospital record formats.
+          </p>
+        </div>
+
+        <!-- Export Buttons Toolbar -->
+        <div class="flex justify-end gap-sm my-md reveal">
+          <button class="btn btn-outline btn-sm" id="btn-print-report" style="padding: 0.5rem 1.2rem;"><i class="fa-solid fa-print"></i> Print Document</button>
+          <button class="btn btn-primary btn-sm" id="btn-pdf-report" style="padding: 0.5rem 1.2rem;"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
+        </div>
+
+        <!-- Report Sheet Wrapper (A4 styled layout) -->
+        <div class="report-sheet-container reveal" id="report-sheet">
+          
+          <!-- Hospital Header -->
+          <div class="report-header flex justify-between items-center" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="hospital-brand flex items-center gap-sm" style="display: flex; align-items: center; gap: var(--space-sm);">
+              <i class="fa-solid fa-heart-pulse logo-heart text-danger" style="font-size: 2.5rem; color: #ef4444;"></i>
+              <div>
+                <h1 class="hospital-name" style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0; font-family: var(--font-display);">HealthPlus Hospital</h1>
+                <p class="hospital-subtext" style="font-size: 0.75rem; color: #64748b; margin: 0; font-family: var(--font-body);">Cardiology & Neural Diagnostic Division</p>
+              </div>
+            </div>
+            <div class="report-metadata text-right" style="font-size: 0.75rem; color: #64748b; text-align: right; font-family: var(--font-body);">
+              <div>Date: <strong id="rep-date">2026-07-12</strong></div>
+              <div>Report ID: <strong id="rep-id">#HP-8902</strong></div>
+              <div>Status: <span class="badge badge-danger" id="rep-status-badge" style="font-size: 0.6rem; padding: 2px 6px; background-color: #ef4444; color: white;">HIGH RISK</span></div>
+            </div>
+          </div>
+
+          <div style="border-bottom: 2px solid #e2e8f0; margin: var(--space-md) 0;"></div>
+
+          <!-- Section 1: Patient Details Grid -->
+          <div class="report-section-block" style="font-family: var(--font-body);">
+            <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: var(--space-sm); font-family: var(--font-display);">1. Patient Demographics & Baseline Vitals</h3>
+            <div class="report-details-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xs); font-size: 0.8rem; color: #334155;">
+              <div class="grid-item">Age: <strong id="rep-age" style="color: #0f172a;">-</strong> yrs</div>
+              <div class="grid-item">Biological Sex: <strong id="rep-sex" style="color: #0f172a;">-</strong></div>
+              <div class="grid-item">Resting BP: <strong id="rep-bp" style="color: #0f172a;">-</strong> mmHg</div>
+              <div class="grid-item">Serum Cholesterol: <strong id="rep-chol" style="color: #0f172a;">-</strong> mg/dl</div>
+              <div class="grid-item">Fasting Blood Sugar: <strong id="rep-fbs" style="color: #0f172a;">-</strong></div>
+              <div class="grid-item">Resting ECG state: <strong id="rep-ecg" style="color: #0f172a;">-</strong></div>
+            </div>
+          </div>
+
+          <!-- Section 2: Clinical Vitals & Stress Testing -->
+          <div class="report-section-block" style="margin-top: var(--space-md); font-family: var(--font-body);">
+            <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: var(--space-sm); font-family: var(--font-display);">2. stress test & coronary parameters</h3>
+            <div class="report-details-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xs); font-size: 0.8rem; color: #334155;">
+              <div class="grid-item">Chest Pain Type: <strong id="rep-cp" style="color: #0f172a;">-</strong></div>
+              <div class="grid-item">Max Heart Rate: <strong id="rep-hr" style="color: #0f172a;">-</strong> BPM</div>
+              <div class="grid-item">Exercise Angina: <strong id="rep-exang" style="color: #0f172a;">-</strong></div>
+              <div class="grid-item">ST Depression (oldpeak): <strong id="rep-peak" style="color: #0f172a;">-</strong> mm</div>
+              <div class="grid-item">ST Peak Slope: <strong id="rep-slope" style="color: #0f172a;">-</strong></div>
+              <div class="grid-item">Major Vessels (ca): <strong id="rep-ca" style="color: #0f172a;">-</strong></div>
+            </div>
+          </div>
+
+          <!-- Section 3: AI Classification Metrics -->
+          <div class="report-section-block" style="margin-top: var(--space-md); background: #f8fafc; padding: var(--space-md); border-radius: var(--radius-sm); border: 1px solid #e2e8f0; font-family: var(--font-body);">
+            <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #2563eb; text-transform: uppercase; margin-bottom: var(--space-sm); font-family: var(--font-display);">3. Naive Bayes Diagnostic Assessment</h3>
+            <div class="flex justify-between items-center" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
+              <div style="font-size: 0.8rem; color: #334155; line-height: 1.5; max-width: 480px;">
+                Intake parameters evaluated against the Cleveland heart disease model vector. 
+                Diagnostic probability is measured at <strong id="rep-prob" style="color: #0f172a;">0%</strong>, indicating a <strong id="rep-risk-text" style="color: #ef4444;">High Coronary Occlusion Risk</strong>. Confidence rating: <strong id="rep-conf" style="color: #0f172a;">94.2%</strong>.
+              </div>
+              
+              <!-- QR Code Placeholder -->
+              <div class="qr-placeholder-wrapper flex flex-col items-center" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="qr-box" style="width: 80px; height: 80px; border: 2px solid #cbd5e1; border-radius: 4px; padding: 4px; background: #ffffff; display: flex; justify-content: center; align-items: center;">
+                  <i class="fa-solid fa-qrcode" style="font-size: 4.2rem; color: #0f172a;"></i>
+                </div>
+                <span style="font-size: 0.6rem; color: #64748b; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Verify Diagnostic</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Prescriptive Recommendations & Doctor Notes -->
+          <div class="grid grid-2 gap-md" style="margin-top: var(--space-md); grid-template-columns: 1.3fr 0.7fr; font-family: var(--font-body); display: grid; gap: var(--space-md);">
+            <div class="report-section-block">
+              <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: var(--space-xs); font-family: var(--font-display);">4. Recommendations & Actions</h3>
+              <ul class="text-xs text-secondary" id="rep-rec-list" style="padding-left: var(--space-md); margin: 0; color: #334155; line-height: 1.6; font-size: 0.75rem;">
+                <li>Angiography assessment mapping.</li>
+                <li>Restricted cardiovascular peak physical strain.</li>
+              </ul>
+            </div>
+            
+            <!-- Doctor Signature Block -->
+            <div class="report-section-block flex flex-col justify-between" style="border-left: 1px solid #cbd5e1; padding-left: var(--space-md); display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="doctor-notes">
+                <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: var(--space-xs); font-family: var(--font-display);">Doctor Notes</h3>
+                <div style="border: 1px dashed #cbd5e1; height: 75px; border-radius: 4px; background: #fafafa; padding: 4px; font-size: 0.7rem; color: #94a3b8; font-style: italic;">
+                  Write clinical notes or patient instructions here...
+                </div>
+              </div>
+              <div class="signature-line" style="margin-top: var(--space-md); border-top: 1px solid #94a3b8; text-align: center; font-size: 0.75rem; color: #475569; padding-top: 4px;">
+                Signature of Cardiologist
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="team" class="team-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-primary">Research Project Team</span>
+          <h2 class="text-h1 section-title">Developers & Advisors</h2>
+          <p class="text-subheading section-subtitle">
+            The engineering team and clinical advisors who built and verified this predictive framework.
+          </p>
+        </div>
+
+        <!-- Team Layout Grid -->
+        <div class="grid grid-3 gap-lg reveal">
+          
+          <!-- Student Developer 1 -->
+          <div class="glass-card text-center hover-lift flex flex-col justify-between" style="padding: var(--space-xl);">
+            <div class="member-avatar-wrapper" style="margin-bottom: var(--space-md);">
+              <div class="avatar-ring" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); padding: 4px; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-user-gear text-gradient-primary" style="font-size: 3.5rem;"></i>
+              </div>
+            </div>
+            <h3 class="text-h3 my-xxs">Sourav Debnanth</h3>
+            <span class="badge badge-secondary" style="font-size: 0.65rem; margin-bottom: var(--space-sm);">Lead AI Architect</span>
+            <p class="text-xs text-secondary my-sm">
+              MS candidate in Biomedical Engineering. Specialize in hyperparameter optimizations and gradient boosting classifiers.
+            </p>
+            <div class="social-links flex gap-md justify-center" style="margin-top: var(--space-md);">
+              <a href="https://github.com" target="_blank" class="text-muted hover-primary" aria-label="GitHub"><i class="fa-brands fa-github" style="font-size: 1.2rem;"></i></a>
+              <a href="https://linkedin.com" target="_blank" class="text-muted hover-primary" aria-label="LinkedIn"><i class="fa-brands fa-linkedin" style="font-size: 1.2rem;"></i></a>
+            </div>
+          </div>
+
+          <!-- Student Developer 2 -->
+          <div class="glass-card text-center hover-lift flex flex-col justify-between" style="padding: var(--space-xl);">
+            <div class="member-avatar-wrapper" style="margin-bottom: var(--space-md);">
+              <div class="avatar-ring" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--secondary); padding: 4px; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-user-pen text-gradient-accent" style="font-size: 3.5rem;"></i>
+              </div>
+            </div>
+            <h3 class="text-h3 my-xxs">Paticor</h3>
+            <span class="badge badge-secondary" style="font-size: 0.65rem; margin-bottom: var(--space-sm);">UX & Frontend Engineer</span>
+            <p class="text-xs text-secondary my-sm">
+              BS candidate in Computer Science. Focused on data visualization dashboards, print CSS pipelines, and responsive interface systems.
+            </p>
+            <div class="social-links flex gap-md justify-center" style="margin-top: var(--space-md);">
+              <a href="https://github.com" target="_blank" class="text-muted hover-primary" aria-label="GitHub"><i class="fa-brands fa-github" style="font-size: 1.2rem;"></i></a>
+              <a href="https://linkedin.com" target="_blank" class="text-muted hover-primary" aria-label="LinkedIn"><i class="fa-brands fa-linkedin" style="font-size: 1.2rem;"></i></a>
+            </div>
+          </div>
+
+          <!-- Supervisor -->
+          <div class="glass-card text-center hover-lift flex flex-col justify-between" style="padding: var(--space-xl); border-color: var(--secondary);">
+            <div class="member-avatar-wrapper" style="margin-bottom: var(--space-md);">
+              <div class="avatar-ring" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--accent); padding: 4px; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-user-doctor text-gradient-accent" style="font-size: 3.5rem;"></i>
+              </div>
+            </div>
+            <h3 class="text-h3 my-xxs">Dr. Tania Islam</h3>
+            <span class="badge badge-primary" style="font-size: 0.65rem; margin-bottom: var(--space-sm);">Clinical Project Supervisor</span>
+            <p class="text-xs text-secondary my-sm">
+              Associate Professor of Cardiology at the Institute of Medical Intelligence. Guide clinical target selections and boundary constraints.
+            </p>
+            <div class="social-links flex gap-md justify-center" style="margin-top: var(--space-md);">
+              <a href="https://researchgate.net" target="_blank" class="text-muted hover-primary" aria-label="ResearchGate"><i class="fa-brands fa-researchgate" style="font-size: 1.2rem;"></i></a>
+              <a href="https://linkedin.com" target="_blank" class="text-muted hover-primary" aria-label="LinkedIn"><i class="fa-brands fa-linkedin" style="font-size: 1.2rem;"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Academic Affiliation -->
+        <div class="glass-card reveal text-center my-xl" style="padding: var(--space-lg); border-style: dashed;">
+          <div class="flex justify-center items-center gap-md" style="flex-wrap: wrap;">
+            <i class="fa-solid fa-graduation-cap text-gradient-primary" style="font-size: 2.5rem;"></i>
+            <div class="text-left" style="text-align: left;">
+              <h4 class="text-h3" style="font-size: 1rem; margin: 0; color: var(--text-primary);">Department of Artificial Intelligence in Medicine</h4>
+              <p class="text-xs text-secondary" style="margin: 0;">University of Bio-Engineering Diagnostics & Medical Robotics</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section py-huge">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="badge badge-primary">Get In Touch</span>
+          <h2 class="text-h1 section-title">Contact & Support</h2>
+          <p class="text-subheading section-subtitle">
+            Submit questions regarding predictive model accuracies, dataset licenses, or clinical integration inquiries.
+          </p>
+        </div>
+
+        <div class="grid grid-2 gap-xl reveal" style="align-items: center;">
+          
+          <!-- Column 1: Info and Channels -->
+          <div class="glass-card flex flex-col gap-lg" style="padding: var(--space-xl); height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h3 class="text-h3" style="font-size: 1.2rem; margin-bottom: var(--space-md);"><i class="fa-solid fa-circle-nodes text-gradient-primary"></i> Research Headquarters</h3>
+              <p class="text-xs text-secondary" style="line-height: 1.6; max-width: 420px; margin-bottom: var(--space-lg);">
+                Our research laboratory is headquartered within the medical innovation corridors. Feel free to contact our development branch.
+              </p>
+            </div>
+
+            <!-- Contacts Info list -->
+            <div class="flex flex-col gap-md" style="display: flex; flex-direction: column; gap: var(--space-md);">
+              <div class="flex items-center gap-sm">
+                <i class="fa-solid fa-location-dot text-gradient-primary" style="font-size: 1.25rem;"></i>
+                <span class="text-xs text-secondary">Cardiovascular Tech Wing, Clinic Block C, Stanford CA</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <i class="fa-solid fa-envelope text-gradient-accent" style="font-size: 1.25rem;"></i>
+                <span class="text-xs text-secondary">research@healthplushospital.org</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <i class="fa-solid fa-phone text-gradient-primary" style="font-size: 1.25rem;"></i>
+                <span class="text-xs text-secondary">+1 (650) 497-2300</span>
+              </div>
+            </div>
+            
+            <div style="margin-top: var(--space-lg); border-top: 1px solid var(--border-color); padding-top: var(--space-md);">
+              <p class="text-xs text-muted" style="font-style: italic;">
+                * Direct support hours: Mon - Fri, 9:00 AM - 5:00 PM PST
+              </p>
+            </div>
+          </div>
+
+          <!-- Column 2: Contact Form -->
+          <div class="glass-card" style="padding: var(--space-xl);">
+            <form id="contact-form" novalidate>
+              <div class="grid grid-2 gap-sm">
+                
+                <!-- Name -->
+                <div class="form-group">
+                  <label for="contact-name" class="form-label">Full Name *</label>
+                  <div class="input-wrapper">
+                    <input type="text" id="contact-name" class="input-field" placeholder="e.g. John Doe" required>
+                    <i class="fa-solid fa-user input-icon"></i>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                  <label for="contact-email" class="form-label">Email Address *</label>
+                  <div class="input-wrapper">
+                    <input type="email" id="contact-email" class="input-field" placeholder="e.g. john@example.com" required>
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Subject -->
+              <div class="form-group">
+                <label for="contact-subject" class="form-label">Inquiry Subject *</label>
+                <div class="input-wrapper">
+                  <input type="text" id="contact-subject" class="input-field" placeholder="e.g. Cardiological model weights" required>
+                  <i class="fa-solid fa-circle-info input-icon"></i>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div class="form-group">
+                <label for="contact-message" class="form-label">Your Message *</label>
+                <div class="input-wrapper">
+                  <textarea id="contact-message" class="input-field" rows="4" placeholder="Type message..." required style="padding-top: var(--space-sm); resize: none;"></textarea>
+                  <i class="fa-solid fa-message input-icon" style="top: 1.25rem;"></i>
+                </div>
+              </div>
+
+              <!-- Submit contact alert -->
+              <div id="contact-alert" class="alert-box alert-danger hidden" style="margin-top: var(--space-xs); margin-bottom: var(--space-md); padding: var(--space-sm);">
+                <i class="fa-solid fa-circle-exclamation"></i> <span class="alert-message"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="btn-contact-submit" style="width: 100%; padding: 0.75rem 2rem;">
+                <i class="fa-solid fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="py-xl" style="background: rgba(var(--surface-raw), 0.4); border-top: 1px solid var(--border-color); font-family: var(--font-body);">
+    <div class="container">
+      <div class="flex justify-between items-center" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
+        
+        <!-- Brand / copyright -->
+        <div class="footer-brand">
+          <h4 class="hospital-name" style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin: 0; font-family: var(--font-display);">HealthPlus Hospital</h4>
+          <span class="text-xs text-muted">&copy; 2026 AI Healthcare Diagnostics. Stanford Lab Research.</span>
+        </div>
+
+        <!-- Social Channels -->
+        <div class="footer-socials flex gap-md">
+          <a href="https://twitter.com" target="_blank" class="text-muted hover-primary" aria-label="Twitter"><i class="fa-brands fa-x-twitter" style="font-size: 1.1rem;"></i></a>
+          <a href="https://github.com" target="_blank" class="text-muted hover-primary" aria-label="GitHub"><i class="fa-brands fa-github" style="font-size: 1.1rem;"></i></a>
+          <a href="https://linkedin.com" target="_blank" class="text-muted hover-primary" aria-label="LinkedIn"><i class="fa-brands fa-linkedin" style="font-size: 1.1rem;"></i></a>
+          <a href="https://researchgate.net" target="_blank" class="text-muted hover-primary" aria-label="ResearchGate"><i class="fa-brands fa-researchgate" style="font-size: 1.1rem;"></i></a>
+        </div>
+
+      </div>
+
+      <!-- Medical Disclaimer statement -->
+      <div style="margin-top: var(--space-md); border-top: 1px dashed var(--border-color); padding-top: var(--space-sm);">
+        <p class="text-xs text-muted" style="font-size: 0.65rem; line-height: 1.5; text-align: center; margin: 0;">
+          <strong>Disclaimer:</strong> HealthPlus Hospital AI heart disease predictive models are research demonstrators based on statistical Cleveland archives. Results represent simulated evaluations and should not be used as official cardiological diagnostic advice. In case of emergency or cardiac chest pains, contact local clinics or call 911 immediately.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back To Top Widget -->
+  <button id="back-to-top" aria-label="Back to Top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Floating AI Assistant Button Widget -->
+  <div class="ai-assistant-widget">
+    <div class="chat-notification-badge" id="ai-chat-badge">1</div>
+    <button class="ai-assistant-btn" id="ai-assistant-toggle" aria-label="Toggle AI Assistant" data-tooltip="Ask Healthcare AI">
+      <i class="fa-solid fa-robot"></i>
+    </button>
+  </div>
+
+  <!-- Glassmorphic AI Chat Panel (Initially Hidden) -->
+  <div class="ai-chat-panel hidden" id="ai-chat-panel" style="display: flex; flex-direction: column;">
+    
+    <!-- Header -->
+    <div class="ai-chat-header" style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-sm) var(--space-md); border-bottom: 1px solid rgba(255, 255, 255, 0.08); background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(6, 182, 212, 0.1));">
+      <div class="flex items-center gap-xs" style="display: flex; align-items: center; gap: var(--space-xs);">
+        <div class="chat-avatar-ring" style="width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(var(--surface-raw), 0.5); border: 1px solid var(--border-color); position: relative;">
+          <i class="fa-solid fa-robot text-gradient-primary" style="font-size: 1.15rem;"></i>
+          <span class="online-indicator" style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent); border: 1.5px solid white;"></span>
+        </div>
+        <div>
+          <h4 class="chat-title" style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--text-primary); margin: 0;">HealthPlus AI</h4>
+          <span class="chat-subtitle" style="font-size: 0.65rem; color: var(--text-muted); font-weight: 500;">Clinical Virtual Agent</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-xs" style="display: flex; align-items: center; gap: var(--space-xs);">
+        <button class="chat-ctrl-btn" id="ai-chat-minimize" aria-label="Minimize Chat" style="background: transparent; border: none; color: var(--text-secondary); cursor: pointer; padding: 4px; font-size: 0.8rem;"><i class="fa-solid fa-window-minimize"></i></button>
+        <button class="chat-ctrl-btn" id="ai-chat-close" aria-label="Close Chat" style="background: transparent; border: none; color: var(--text-secondary); cursor: pointer; padding: 4px; font-size: 0.95rem;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+    <!-- Message Body -->
+    <div class="ai-chat-body" id="ai-chat-body" style="flex-grow: 1; overflow-y: auto; padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-md); font-family: var(--font-body);">
+      
+      <!-- Welcome Message -->
+      <div class="chat-msg assistant-msg" style="display: flex; align-items: flex-start; gap: var(--space-xs); margin-right: 24px;">
+        <div class="msg-bubble" style="background: rgba(var(--surface-raw), 0.35); border: 1px solid var(--border-color); border-radius: 12px 12px 12px 2px; padding: var(--space-sm) var(--space-md); font-size: 0.78rem; color: var(--text-primary); line-height: 1.5; width: 100%;">
+          <p class="msg-text" style="margin: 0 0 6px 0;">👋 Welcome to <strong>HealthPlus AI</strong>.</p>
+          <p class="msg-text" style="margin: 0 0 6px 0;">I can help you with:</p>
+          <ul class="msg-list" style="margin: 0 0 8px 0; padding-left: 16px; list-style-type: disc;">
+            <li>🫀 Heart Disease Risk</li>
+            <li>📊 Explain Medical Reports</li>
+            <li>💊 Health Tips & Diet advice</li>
+            <li>❤️ Lifestyle adjustments</li>
+            <li>📈 Explain AI Predictions</li>
+            <li>🏥 Understanding Medical Terms</li>
+          </ul>
+          <p class="msg-text" style="margin: 0;">How may I help you today?</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Grid -->
+      <div class="chat-actions-container" style="display: flex; flex-direction: column; gap: 6px;">
+        <span class="action-section-label" style="font-size: 0.65rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">Quick Actions:</span>
+        <div class="quick-actions-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;">
+          <button class="action-chip" data-action="risk" style="padding: 6px var(--space-xs); font-size: 0.7rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(var(--surface-raw), 0.2); color: var(--text-primary); text-align: left; cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-heart-pulse text-danger"></i> Check Risk</button>
+          <button class="action-chip" data-action="report" style="padding: 6px var(--space-xs); font-size: 0.7rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(var(--surface-raw), 0.2); color: var(--text-primary); text-align: left; cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-file-medical text-primary"></i> Explain Report</button>
+          <button class="action-chip" data-action="tips" style="padding: 6px var(--space-xs); font-size: 0.7rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(var(--surface-raw), 0.2); color: var(--text-primary); text-align: left; cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-carrot text-success"></i> Health Tips</button>
+          <button class="action-chip" data-action="prediction" style="padding: 6px var(--space-xs); font-size: 0.7rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(var(--surface-raw), 0.2); color: var(--text-primary); text-align: left; cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-magnifying-glass-chart text-warning"></i> Explain Prediction</button>
+          <button class="action-chip" data-action="dict" style="padding: 6px var(--space-xs); font-size: 0.7rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(var(--surface-raw), 0.2); color: var(--text-primary); text-align: left; cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-book-medical text-primary"></i> Terminology</button>
+          <button class="action-chip" data-action="emergency" style="padding: 6px var(--space-xs); font-size: 0.7rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(var(--surface-raw), 0.2); color: var(--text-primary); text-align: left; cursor: pointer; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-truck-medical text-danger"></i> Emergency Guide</button>
+        </div>
+      </div>
+
+      <!-- Suggestions Box -->
+      <div class="chat-actions-container" style="display: flex; flex-direction: column; gap: 6px;">
+        <span class="action-section-label" style="font-size: 0.65rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em;">Suggested Questions:</span>
+        <div class="suggestions-list" style="display: flex; flex-direction: column; gap: 4px;">
+          <button class="suggestion-chip" data-query="Can cholesterol cause heart disease?" style="text-align: left; padding: 6px 10px; font-size: 0.72rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(37, 99, 235, 0.05); color: var(--primary); cursor: pointer; width: 100%;">Can cholesterol cause heart disease?</button>
+          <button class="suggestion-chip" data-query="Explain what an ECG is." style="text-align: left; padding: 6px 10px; font-size: 0.72rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(37, 99, 235, 0.05); color: var(--primary); cursor: pointer; width: 100%;">Explain what an ECG is.</button>
+          <button class="suggestion-chip" data-query="What does High Risk mean?" style="text-align: left; padding: 6px 10px; font-size: 0.72rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(37, 99, 235, 0.05); color: var(--primary); cursor: pointer; width: 100%;">What does High Risk mean?</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Chat Footer Input -->
+    <div class="ai-chat-footer" style="padding: var(--space-sm); border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; gap: var(--space-xs); background: rgba(var(--surface-raw), 0.2);">
+      <div class="footer-ctrl-wrapper" style="display: flex; gap: 4px;">
+        <button class="footer-ctrl-btn" id="btn-chat-tts" aria-label="Toggle Text-to-Speech" data-active="false" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border-color); background: transparent; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;"><i class="fa-solid fa-volume-xmark"></i></button>
+        <button class="footer-ctrl-btn" id="btn-chat-speech" aria-label="Voice Input" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border-color); background: transparent; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;"><i class="fa-solid fa-microphone"></i></button>
+      </div>
+      <div class="chat-input-wrapper" style="flex-grow: 1; position: relative; display: flex; align-items: center;">
+        <input type="text" id="ai-chat-input" placeholder="Ask HealthPlus AI..." aria-label="Chat input field" style="width: 100%; padding: 6px 32px 6px 10px; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(var(--surface-raw), 0.5); color: var(--text-primary); font-size: 0.75rem; outline: none;">
+        <button id="btn-chat-send" aria-label="Send Message" style="position: absolute; right: 6px; background: transparent; border: none; color: var(--primary); cursor: pointer; padding: 4px; font-size: 0.85rem;"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Chart.js CDN Link -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- JavaScript Interaction Link -->
+  <script src="js/script.js"></script>
+</body>
+</html>
