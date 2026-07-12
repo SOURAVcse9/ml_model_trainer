@@ -1,14 +1,16 @@
 import os
 import joblib
 import pandas as pd
-from backend.utils import preprocess_single_input
+from pathlib import Path
+from utils import preprocess_single_input
 
-# Path definitions
-MODELS_DIR = os.path.join(os.path.dirname(__file__), "models")
-MODEL_PATH = os.path.join(MODELS_DIR, "saved_model.pkl")
-SCALER_PATH = os.path.join(MODELS_DIR, "saved_scaler.pkl")
-FEATURES_PATH = os.path.join(MODELS_DIR, "saved_features.pkl")
-PIPELINE_PATH = os.path.join(MODELS_DIR, "saved_pipeline.pkl")
+# Path definitions using pathlib
+BASE_DIR = Path(__file__).resolve().parent
+MODELS_DIR = BASE_DIR / "models"
+MODEL_PATH = MODELS_DIR / "saved_model.pkl"
+SCALER_PATH = MODELS_DIR / "saved_scaler.pkl"
+FEATURES_PATH = MODELS_DIR / "saved_features.pkl"
+PIPELINE_PATH = MODELS_DIR / "saved_pipeline.pkl"
 
 # Global variables loaded on startup
 _model = None
@@ -19,7 +21,7 @@ _pipeline_meta = None
 def load_artifacts():
     global _model, _scaler, _feature_columns, _pipeline_meta
     if _model is None:
-        if not os.path.exists(MODEL_PATH):
+        if not MODEL_PATH.exists():
             raise FileNotFoundError("Trained model artifact not found. Please run train.py first.")
         _model = joblib.load(MODEL_PATH)
         _scaler = joblib.load(SCALER_PATH)

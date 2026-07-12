@@ -1863,95 +1863,210 @@
         </div>
 
         <!-- Report Sheet Wrapper (A4 styled layout) -->
-        <div class="report-sheet-container reveal" id="report-sheet">
+        <div class="report-sheet-container reveal" id="report-sheet" style="font-family: var(--font-body); padding: var(--space-xl); background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; max-width: 800px; margin: 0 auto; box-shadow: var(--shadow-lg);">
           
-          <!-- Hospital Header -->
-          <div class="report-header flex justify-between items-center" style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="hospital-brand flex items-center gap-sm" style="display: flex; align-items: center; gap: var(--space-sm);">
-              <i class="fa-solid fa-heart-pulse logo-heart text-danger" style="font-size: 2.5rem; color: #ef4444;"></i>
+          <!-- Hospital Header (Blue Top Banner Style) -->
+          <div class="report-hospital-header" style="background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #ffffff; padding: var(--space-md) var(--space-lg); border-radius: var(--radius-sm); margin-bottom: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: var(--space-md);">
+              <i class="fa-solid fa-heart-pulse" style="font-size: 3rem; color: #38bdf8;"></i>
               <div>
-                <h1 class="hospital-name" style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0; font-family: var(--font-display);">HealthPlus Hospital</h1>
-                <p class="hospital-subtext" style="font-size: 0.75rem; color: #64748b; margin: 0; font-family: var(--font-body);">Cardiology & Neural Diagnostic Division</p>
+                <h1 style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; margin: 0; color: #ffffff; letter-spacing: -0.02em;">HEALTHPLUS HOSPITAL</h1>
+                <p style="font-size: 0.75rem; margin: 2px 0 0 0; color: #bae6fd; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Department of Cardiology | Clinical CDSS System</p>
+                <p style="font-size: 0.65rem; margin: 2px 0 0 0; color: #bae6fd; opacity: 0.85;">123 Healthcare Ave, Cardiology Tower, Suite 400 | +880-1234-567890 | report@healthplus.org</p>
               </div>
             </div>
-            <div class="report-metadata text-right" style="font-size: 0.75rem; color: #64748b; text-align: right; font-family: var(--font-body);">
-              <div>Date: <strong id="rep-date">2026-07-12</strong></div>
-              <div>Report ID: <strong id="rep-id">#HP-8902</strong></div>
-              <div>Status: <span class="badge badge-danger" id="rep-status-badge" style="font-size: 0.6rem; padding: 2px 6px; background-color: #ef4444; color: white;">HIGH RISK</span></div>
+            <div style="text-align: right; font-size: 0.75rem; color: #e0f2fe; line-height: 1.4;">
+              <div>Report ID: <strong id="rep-id" style="color: #ffffff;">#HP-8902</strong></div>
+              <div>Exam Date: <strong id="rep-date" style="color: #ffffff;">2026-07-12</strong></div>
+              <div>Generated Time: <strong id="rep-time" style="color: #ffffff;">00:00</strong></div>
             </div>
           </div>
 
-          <div style="border-bottom: 2px solid #e2e8f0; margin: var(--space-md) 0;"></div>
-
-          <!-- Section 1: Patient Details Grid -->
-          <div class="report-section-block" style="font-family: var(--font-body);">
-            <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: var(--space-sm); font-family: var(--font-display);">1. Patient Demographics & Baseline Vitals</h3>
-            <div class="report-details-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xs); font-size: 0.8rem; color: #334155;">
-              <div class="grid-item">Age: <strong id="rep-age" style="color: #0f172a;">-</strong> yrs</div>
-              <div class="grid-item">Biological Sex: <strong id="rep-sex" style="color: #0f172a;">-</strong></div>
-              <div class="grid-item">Resting BP: <strong id="rep-bp" style="color: #0f172a;">-</strong> mmHg</div>
-              <div class="grid-item">Serum Cholesterol: <strong id="rep-chol" style="color: #0f172a;">-</strong> mg/dl</div>
-              <div class="grid-item">Fasting Blood Sugar: <strong id="rep-fbs" style="color: #0f172a;">-</strong></div>
-              <div class="grid-item">Resting ECG state: <strong id="rep-ecg" style="color: #0f172a;">-</strong></div>
+          <!-- Section 1: Patient Demographics & Baseline Vitals -->
+          <div class="report-section-block" style="margin-bottom: var(--space-md);">
+            <h3 style="font-size: 0.8rem; font-weight: 700; color: #1e3a8a; text-transform: uppercase; margin: 0 0 var(--space-xs) 0; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; font-family: var(--font-display);">1. Patient Information & Demographics</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-xs); font-size: 0.75rem; background: #f8fafc; padding: var(--space-sm); border-radius: var(--radius-sm); border: 1px solid #e2e8f0;">
+              <div>Patient Name: <span style="font-weight: 700;" contenteditable="true" id="rep-name">John Doe</span> <i class="fa-solid fa-pen" style="font-size:0.6rem; color:#94a3b8; cursor:pointer;" title="Click to edit name"></i></div>
+              <div>Patient ID: <strong id="rep-patient-id">#PT-4921</strong></div>
+              <div>Age: <strong id="rep-age">-</strong> yrs</div>
+              <div>Gender: <strong id="rep-sex">-</strong></div>
+              <div>Height: <span contenteditable="true" style="font-weight: 600;">175 cm</span></div>
+              <div>Weight: <span contenteditable="true" style="font-weight: 600;">72 kg</span></div>
+              <div>Resting BP: <strong id="rep-bp">-</strong> mmHg</div>
+              <div>Heart Rate: <strong id="rep-hr">-</strong> bpm</div>
             </div>
           </div>
 
-          <!-- Section 2: Clinical Vitals & Stress Testing -->
-          <div class="report-section-block" style="margin-top: var(--space-md); font-family: var(--font-body);">
-            <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: var(--space-sm); font-family: var(--font-display);">2. stress test & coronary parameters</h3>
-            <div class="report-details-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xs); font-size: 0.8rem; color: #334155;">
-              <div class="grid-item">Chest Pain Type: <strong id="rep-cp" style="color: #0f172a;">-</strong></div>
-              <div class="grid-item">Max Heart Rate: <strong id="rep-hr" style="color: #0f172a;">-</strong> BPM</div>
-              <div class="grid-item">Exercise Angina: <strong id="rep-exang" style="color: #0f172a;">-</strong></div>
-              <div class="grid-item">ST Depression (oldpeak): <strong id="rep-peak" style="color: #0f172a;">-</strong> mm</div>
-              <div class="grid-item">ST Peak Slope: <strong id="rep-slope" style="color: #0f172a;">-</strong></div>
-              <div class="grid-item">Major Vessels (ca): <strong id="rep-ca" style="color: #0f172a;">-</strong></div>
-            </div>
+          <!-- Section 2: Clinical Parameters Evaluation Matrix -->
+          <div class="report-section-block" style="margin-bottom: var(--space-md);">
+            <h3 style="font-size: 0.8rem; font-weight: 700; color: #1e3a8a; text-transform: uppercase; margin: 0 0 var(--space-xs) 0; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; font-family: var(--font-display);">2. Clinical Parameters Matrix</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.72rem; text-align: left;">
+              <thead>
+                <tr style="background: #e2e8f0; border-bottom: 1.5px solid #cbd5e1; color: #0f172a; font-weight: 700;">
+                  <th style="padding: 6px 10px;">Clinical Parameter</th>
+                  <th style="padding: 6px 10px;">Patient Value</th>
+                  <th style="padding: 6px 10px;">Reference Interval</th>
+                  <th style="padding: 6px 10px; text-align: center;">Diagnostic Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">Patient Age</td>
+                  <td style="padding: 6px 10px;" id="val-age">-</td>
+                  <td style="padding: 6px 10px;">18 – 100 years</td>
+                  <td style="padding: 6px 10px; text-align: center;"><span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">Resting Blood Pressure</td>
+                  <td style="padding: 6px 10px;" id="val-bp">-</td>
+                  <td style="padding: 6px 10px;">90 – 120 mmHg</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-bp">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">Serum Cholesterol</td>
+                  <td style="padding: 6px 10px;" id="val-chol">-</td>
+                  <td style="padding: 6px 10px;">120 – 200 mg/dl</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-chol">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">Chest Pain Type</td>
+                  <td style="padding: 6px 10px;" id="val-cp">-</td>
+                  <td style="padding: 6px 10px;">Typical Angina (0)</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-cp">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">Resting ECG States</td>
+                  <td style="padding: 6px 10px;" id="val-ecg">-</td>
+                  <td style="padding: 6px 10px;">Normal (0)</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-ecg">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">Exercise Induced Angina</td>
+                  <td style="padding: 6px 10px;" id="val-exang">-</td>
+                  <td style="padding: 6px 10px;">No (0)</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-exang">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">ST Depression (oldpeak)</td>
+                  <td style="padding: 6px 10px;" id="val-peak">-</td>
+                  <td style="padding: 6px 10px;">&lt; 1.0 mm</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-peak">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">ST Peak Slope</td>
+                  <td style="padding: 6px 10px;" id="val-slope">-</td>
+                  <td style="padding: 6px 10px;">Upsloping (0)</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-slope">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">Major Fluoroscopy Vessels (ca)</td>
+                  <td style="padding: 6px 10px;" id="val-ca">-</td>
+                  <td style="padding: 6px 10px;">0 vessels</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-ca">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 6px 10px;">Thalassemia Test Result (thal)</td>
+                  <td style="padding: 6px 10px;" id="val-thal">-</td>
+                  <td style="padding: 6px 10px;">Normal (2)</td>
+                  <td style="padding: 6px 10px; text-align: center;" id="status-thal">-</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          <!-- Section 3: AI Classification Metrics -->
-          <div class="report-section-block" style="margin-top: var(--space-md); background: #f8fafc; padding: var(--space-md); border-radius: var(--radius-sm); border: 1px solid #e2e8f0; font-family: var(--font-body);">
-            <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #2563eb; text-transform: uppercase; margin-bottom: var(--space-sm); font-family: var(--font-display);">3. Naive Bayes Diagnostic Assessment</h3>
-            <div class="flex justify-between items-center" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
-              <div style="font-size: 0.8rem; color: #334155; line-height: 1.5; max-width: 480px;">
-                Intake parameters evaluated against the Cleveland heart disease model vector. 
-                Diagnostic probability is measured at <strong id="rep-prob" style="color: #0f172a;">0%</strong>, indicating a <strong id="rep-risk-text" style="color: #ef4444;">High Coronary Occlusion Risk</strong>. Confidence rating: <strong id="rep-conf" style="color: #0f172a;">94.2%</strong>.
+          <!-- Section 3: AI Diagnosis & Clinical Interpretations -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-bottom: var(--space-md);">
+            
+            <!-- Column 1: AI Prediction Details -->
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: var(--space-sm); border-radius: var(--radius-sm);">
+              <h4 style="font-size: 0.75rem; font-weight: 700; color: #1e3a8a; margin: 0 0 6px 0; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px;">3. AI Prediction Assessment</h4>
+              <div style="font-size: 0.72rem; display: flex; flex-direction: column; gap: 4px; color: #334155;">
+                <div style="display:flex; justify-content:space-between;"><span>Diagnostic Outcome:</span> <strong id="rep-diag-outcome" style="color: var(--danger);">Disease Present</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>Disease Probability:</span> <strong id="rep-prob-box">0%</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>Confidence Score:</span> <strong id="rep-conf">0%</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>Clinical Risk Level:</span> <strong id="rep-status-text" style="color:var(--danger);">HIGH RISK</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>Best Performing Model:</span> <strong>Naive Bayes (Google Colab)</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>Prediction Latency:</span> <strong>1.2ms</strong></div>
               </div>
-              
-              <!-- QR Code Placeholder -->
-              <div class="qr-placeholder-wrapper flex flex-col items-center" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div class="qr-box" style="width: 80px; height: 80px; border: 2px solid #cbd5e1; border-radius: 4px; padding: 4px; background: #ffffff; display: flex; justify-content: center; align-items: center;">
-                  <i class="fa-solid fa-qrcode" style="font-size: 4.2rem; color: #0f172a;"></i>
-                </div>
-                <span style="font-size: 0.6rem; color: #64748b; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Verify Diagnostic</span>
-              </div>
             </div>
-          </div>
 
-          <!-- Section 4: Prescriptive Recommendations & Doctor Notes -->
-          <div class="grid grid-2 gap-md" style="margin-top: var(--space-md); grid-template-columns: 1.3fr 0.7fr; font-family: var(--font-body); display: grid; gap: var(--space-md);">
-            <div class="report-section-block">
-              <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: var(--space-xs); font-family: var(--font-display);">4. Recommendations & Actions</h3>
-              <ul class="text-xs text-secondary" id="rep-rec-list" style="padding-left: var(--space-md); margin: 0; color: #334155; line-height: 1.6; font-size: 0.75rem;">
-                <li>Angiography assessment mapping.</li>
-                <li>Restricted cardiovascular peak physical strain.</li>
-              </ul>
+            <!-- Column 2: Clinical Interpretation Text -->
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: var(--space-sm); border-radius: var(--radius-sm);">
+              <h4 style="font-size: 0.75rem; font-weight: 700; color: #1e3a8a; margin: 0 0 6px 0; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px;">4. Clinical Interpretation</h4>
+              <p id="rep-clinical-narrative" style="font-size: 0.68rem; line-height: 1.4; color: #334155; margin: 0; text-align: justify;">
+                The Naive Bayes decision support vector indicates a high risk profile. The primary diagnostic contributors are fluoroscopy-colored major vessels (ca) and ST depression (oldpeak), showing deviations from standard thresholds.
+              </p>
             </div>
             
-            <!-- Doctor Signature Block -->
-            <div class="report-section-block flex flex-col justify-between" style="border-left: 1px solid #cbd5e1; padding-left: var(--space-md); display: flex; flex-direction: column; justify-content: space-between;">
-              <div class="doctor-notes">
-                <h3 class="report-section-title" style="font-size: 0.95rem; font-weight: 700; color: #0f172a; text-transform: uppercase; margin-bottom: var(--space-xs); font-family: var(--font-display);">Doctor Notes</h3>
-                <div style="border: 1px dashed #cbd5e1; height: 75px; border-radius: 4px; background: #fafafa; padding: 4px; font-size: 0.7rem; color: #94a3b8; font-style: italic;">
-                  Write clinical notes or patient instructions here...
-                </div>
+          </div>
+
+          <!-- Section 4: Top Risk Factors & Recommendations -->
+          <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--space-md); margin-bottom: var(--space-md);">
+            
+            <!-- Column 1: Top Risk Factors Table -->
+            <div>
+              <h4 style="font-size: 0.75rem; font-weight: 700; color: #1e3a8a; margin: 0 0 6px 0; text-transform: uppercase; border-bottom: 1px solid #1e3a8a; padding-bottom: 2px; font-family: var(--font-display);">5. Top Risk Factors</h4>
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.68rem; text-align: left;">
+                <thead>
+                  <tr style="background: #e2e8f0; border-bottom: 1.5px solid #cbd5e1; font-weight: 700;">
+                    <th style="padding: 4px 6px; width: 40px;">Rank</th>
+                    <th style="padding: 4px 6px;">Risk Factor</th>
+                    <th style="padding: 4px 6px;">Importance</th>
+                  </tr>
+                </thead>
+                <tbody id="rep-risk-factors-body">
+                  <!-- Injected by script.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Column 2: Patient Specific Recommendations -->
+            <div>
+              <h4 style="font-size: 0.75rem; font-weight: 700; color: #1e3a8a; margin: 0 0 6px 0; text-transform: uppercase; border-bottom: 1px solid #1e3a8a; padding-bottom: 2px; font-family: var(--font-display);">6. Prescriptive Clinical Advice</h4>
+              <div style="font-size: 0.65rem; color: #334155; display: flex; flex-direction: column; gap: 4px; line-height: 1.35;">
+                <div><strong>• Diet & Nutrition:</strong> Limit sodium intake under 2g/day. Restrict saturated fats and increase soluble fibers.</div>
+                <div><strong>• Physical Exercise:</strong> Moderate aerobic physical activities (walk 30 mins, 5 days a week). Avoid isometric lifting.</div>
+                <div><strong>• Lifestyle & Tobacco:</strong> Cease smoking and tobacco products. Restrict alcohol intake.</div>
+                <div><strong>• Medication & Monitoring:</strong> Strict adherence to prescribed medications. Monitor BP daily.</div>
+                <div><strong>• Emergency Guide:</strong> <span id="rep-emergency-rec" style="color:var(--danger); font-weight:600;">If chest pain, severe tightness, or breathing difficulties occur, contact emergency services (911) immediately.</span></div>
               </div>
-              <div class="signature-line" style="margin-top: var(--space-md); border-top: 1px solid #94a3b8; text-align: center; font-size: 0.75rem; color: #475569; padding-top: 4px;">
-                Signature of Cardiologist
+            </div>
+            
+          </div>
+
+          <!-- Section 5: Medical Disclaimer (Standard Hospital Legal Text) -->
+          <div style="font-size: 0.58rem; color: #64748b; border: 1px solid #e2e8f0; padding: var(--space-xs); border-radius: var(--radius-sm); margin-bottom: var(--space-md); text-align: justify; line-height: 1.3;">
+            <strong>MEDICAL DISCLAIMER:</strong> This report is generated using an Artificial Intelligence Clinical Decision Support System. It is intended to assist healthcare professionals and must not be considered a definitive diagnosis. Clinical evaluation, laboratory investigations, ECG, Echocardiography, and physician judgment remain essential before making any treatment decision.
+          </div>
+
+          <!-- Section 6: Cardiologist Seal & Signatures -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); align-items: end; font-family: var(--font-body); font-size: 0.72rem; color: #475569; margin-top: var(--space-md); border-top: 1px solid #e2e8f0; padding-top: var(--space-sm);">
+            <div>
+              <strong>Clinician Comments:</strong>
+              <div style="border: 1px dashed #cbd5e1; height: 60px; border-radius: 4px; background: #fafafa; padding: 4px; font-size: 0.65rem; color: #94a3b8; font-style: italic; margin-top: 4px;" contenteditable="true">
+                Write Cardiologist directions or comments here...
               </div>
+            </div>
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;">
+              <div style="width: 60px; height: 60px; border: 2px dashed #94a3b8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: #94a3b8; font-style: italic;">Hospital Seal</div>
+              <span style="font-size:0.6rem; color:#94a3b8; margin-top: 4px;">Stamp / Seal Placement</span>
+            </div>
+            <div style="text-align: center;">
+              <div style="height: 45px; border-bottom: 1px solid #94a3b8; margin-bottom: 4px; display: flex; align-items: flex-end; justify-content: center;">
+                <span style="font-family:'Courier New', monospace; font-size: 0.85rem; font-style: italic; color: #1e3a8a; font-weight: 700; letter-spacing: 0.05em; display: inline-block;" id="rep-doctor-sig">Dr. Tania Islam</span>
+              </div>
+              <div>Physician Signature</div>
+              <div style="font-size: 0.62rem; color:#94a3b8; margin-top: 2px;">Follow-up Date: <span contenteditable="true" style="font-weight:600; text-decoration: underline;">2026-07-26</span></div>
             </div>
           </div>
 
+          <!-- Section 7: Report Footer -->
+          <div style="display: flex; justify-content: space-between; border-top: 1px solid #e2e8f0; margin-top: var(--space-md); padding-top: 4px; font-size: 0.58rem; color: #94a3b8; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
+            <span>HealthPlus Hospital</span>
+            <span>Confidential Medical Report</span>
+            <span>Version 1.0</span>
+            <span>AI Clinical Decision Support System</span>
+          </div>
         </div>
 
       </div>

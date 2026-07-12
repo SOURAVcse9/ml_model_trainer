@@ -7,6 +7,49 @@
 ================================================================================
 */
 
+// --- Protocol Check: Detect and warn if website is opened via file:// protocol ---
+if (window.location.protocol === 'file:') {
+  document.addEventListener('DOMContentLoaded', () => {
+    const warningDiv = document.createElement('div');
+    warningDiv.style.position = 'fixed';
+    warningDiv.style.top = '0';
+    warningDiv.style.left = '0';
+    warningDiv.style.width = '100%';
+    warningDiv.style.height = '100%';
+    warningDiv.style.backgroundColor = 'rgba(15, 23, 42, 0.98)';
+    warningDiv.style.color = '#ffffff';
+    warningDiv.style.zIndex = '100000';
+    warningDiv.style.display = 'flex';
+    warningDiv.style.flexDirection = 'column';
+    warningDiv.style.alignItems = 'center';
+    warningDiv.style.justifyContent = 'center';
+    warningDiv.style.fontFamily = 'var(--font-body), sans-serif';
+    warningDiv.style.padding = '20px';
+    warningDiv.style.textAlign = 'center';
+
+    warningDiv.innerHTML = `
+      <div style="max-width: 600px; padding: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; backdrop-filter: blur(10px);">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 4rem; color: var(--warning); margin-bottom: 20px; animation: pulse-border 1.5s infinite;"></i>
+        <h1 style="font-family: var(--font-display); font-size: 1.8rem; margin: 0 0 16px 0; font-weight: 800; color: #ffffff;">Incorrect Execution Protocol</h1>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
+          You are opening the website incorrectly via the <strong>file:///</strong> protocol. Modern browsers block cross-origin requests (CORS) from local files, preventing communication with the diagnostic AI server.
+        </p>
+        <p style="font-size: 0.95rem; color: var(--primary); font-weight: 600; margin-bottom: 8px;">
+          Please run the website using a local web server:
+        </p>
+        <code style="display: inline-block; background: #000; padding: 10px 20px; border-radius: 6px; font-family: monospace; color: var(--accent); font-size: 0.85rem; margin-bottom: 20px;">
+          python -m http.server 8080
+        </code>
+        <p style="font-size: 0.75rem; color: var(--text-muted);">
+          Or use the VS Code <strong>Live Server</strong> extension.
+        </p>
+      </div>
+    `;
+    document.body.appendChild(warningDiv);
+    console.error("Incorrect execution protocol: file:/// protocol detected.");
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- Initialize Core Modules ---
   initTheme();
@@ -46,7 +89,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- AI Virtual Assistant Module ---
   initVirtualAssistant();
+
+  // --- Backend Health Check Module ---
+  checkBackendHealth();
 });
+
+/**
+ * Backend Service Health Verification
+ */
+function checkBackendHealth() {
+  const submitBtn = document.getElementById('btn-pred-submit');
+  const alertBox = document.getElementById('prediction-alert');
+  const alertMsg = alertBox ? alertBox.querySelector('.alert-message') : null;
+
+  if (!submitBtn) return;
+
+  console.log("Checking API backend health state...");
+  
+  fetch('http://127.0.0.1:8000/api/health')
+    .then(response => {
+      if (!response.ok) throw new Error("Health check returned status error.");
+      return response.json();
+    })
+    .then(data => {
+      if (data.status === "running" && data.model === "loaded") {
+        console.log("HealthPlus API Health Check: OK. Naive Bayes Model Loaded.");
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+      } else {
+        throw new Error("Model pipeline missing in backend.");
+      }
+    })
+    .catch(err => {
+      console.warn("HealthPlus API Health Check: OFFLINE.", err);
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.65';
+      submitBtn.innerHTML = '<i class="fa-solid fa-plug-circle-xmark"></i> Backend Offline';
+      
+      if (alertBox && alertMsg) {
+        alertMsg.innerHTML = '<strong>Warning:</strong> Diagnostics backend is currently offline. Please run the FastAPI server at http://127.0.0.1:8000 first.';
+        alertBox.classList.remove('hidden');
+        alertBox.style.borderColor = 'var(--warning)';
+      }
+    });
+}
 
 /**
  * Theme Manager Module
@@ -1269,74 +1355,107 @@ function initPatientReport() {
   // Populate values when diagnostics complete
   window.addEventListener('diagnosticsComplete', (e) => {
     try {
-      const data = e.detail;
+      const details = e.detail;
+      const inputs = details.inputs;
+      const api = details.apiResponse;
 
       // 1. Reveal section
       reportSec.classList.remove('hidden');
 
       // 2. Populate dates and IDs
-      document.getElementById('rep-date').textContent = new Date().toLocaleDateString();
+      const examDate = new Date();
+      document.getElementById('rep-date').textContent = examDate.toLocaleDateString();
+      document.getElementById('rep-time').textContent = examDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
 
       const diagnosticId = document.getElementById('res-diag-id').textContent;
       document.getElementById('rep-id').textContent = diagnosticId;
 
-      const riskLevel = document.getElementById('res-risk-level').textContent;
-      const probability = document.getElementById('res-prob-val').textContent;
+      // 3. Demographics Summary Block
+      document.getElementById('rep-age').textContent = inputs.age;
+      document.getElementById('rep-sex').textContent = inputs.sex === '1' ? 'Male' : 'Female';
+      document.getElementById('rep-bp').textContent = inputs.bp;
+      document.getElementById('rep-hr').textContent = inputs.hr;
+
+      // 4. Clinical Parameter Table Cells
+      document.getElementById('val-age').textContent = inputs.age;
       
-      const confText = document.getElementById('res-confidence').textContent || '';
-      const confidence = confText.split(' ')[0] || '94.2%';
+      document.getElementById('val-bp').textContent = `${inputs.bp} mmHg`;
+      const bpStatus = parseInt(inputs.bp, 10) > 130 ? '<span class="badge badge-danger" style="font-size:0.6rem; padding: 2px 6px;">Abnormal</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-bp').innerHTML = bpStatus;
 
-      // 3. Write metadata status
-      const statusBadge = document.getElementById('rep-status-badge');
-      const riskText = document.getElementById('rep-risk-text');
-      if (riskLevel === 'HIGH RISK') {
-        statusBadge.textContent = 'HIGH RISK';
-        statusBadge.style.backgroundColor = '#ef4444';
-        riskText.textContent = 'High Coronary Occlusion Risk';
-        riskText.style.color = '#ef4444';
-      } else {
-        statusBadge.textContent = 'LOW RISK';
-        statusBadge.style.backgroundColor = '#10b981';
-        riskText.textContent = 'Low Coronary Occlusion Risk';
-        riskText.style.color = '#10b981';
-      }
+      document.getElementById('val-chol').textContent = `${inputs.chol} mg/dl`;
+      const cholStatus = parseInt(inputs.chol, 10) > 240 ? '<span class="badge badge-danger" style="font-size:0.6rem; padding: 2px 6px;">Abnormal</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-chol').innerHTML = cholStatus;
 
-      document.getElementById('rep-prob').textContent = probability;
-      document.getElementById('rep-conf').textContent = confidence;
+      const cpLabels = ['Typical Angina (0)', 'Atypical Angina (1)', 'Non-Anginal (2)', 'Asymptomatic (3)'];
+      document.getElementById('val-cp').textContent = cpLabels[parseInt(inputs.cp, 10)] || inputs.cp;
+      const cpStatus = parseInt(inputs.cp, 10) > 0 ? '<span class="badge badge-warning" style="font-size:0.6rem; padding: 2px 6px;">Elevated</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-cp').innerHTML = cpStatus;
 
-      // 4. Map Patient details grid
-      document.getElementById('rep-age').textContent = data.age;
-      document.getElementById('rep-sex').textContent = data.sex === '1' ? 'Male' : 'Female';
-      document.getElementById('rep-bp').textContent = data.bp;
-      document.getElementById('rep-chol').textContent = data.chol;
-      document.getElementById('rep-fbs').textContent = data.fbs === '1' ? 'Elevated (>120 mg/dl)' : 'Normal (<120 mg/dl)';
+      const ecgLabels = ['Normal (0)', 'ST-T Wave Anomaly (1)', 'LV Hypertrophy (2)'];
+      document.getElementById('val-ecg').textContent = ecgLabels[parseInt(inputs.ecg, 10)] || inputs.ecg;
+      const ecgStatus = parseInt(inputs.ecg, 10) > 0 ? '<span class="badge badge-warning" style="font-size:0.6rem; padding: 2px 6px;">Elevated</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-ecg').innerHTML = ecgStatus;
+
+      document.getElementById('val-exang').textContent = inputs.exang === '1' ? 'Yes (1)' : 'No (0)';
+      const exangStatus = inputs.exang === '1' ? '<span class="badge badge-danger" style="font-size:0.6rem; padding: 2px 6px;">Ischemia</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-exang').innerHTML = exangStatus;
+
+      document.getElementById('val-peak').textContent = `${inputs.peak} mm`;
+      const peakStatus = parseFloat(inputs.peak) > 1.0 ? '<span class="badge badge-danger" style="font-size:0.6rem; padding: 2px 6px;">Strain</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-peak').innerHTML = peakStatus;
+
+      const slopeLabels = ['Upsloping (0)', 'Flat (1)', 'Downsloping (2)'];
+      document.getElementById('val-slope').textContent = slopeLabels[parseInt(inputs.slope, 10)] || inputs.slope;
+      const slopeStatus = parseInt(inputs.slope, 10) > 0 ? '<span class="badge badge-warning" style="font-size:0.6rem; padding: 2px 6px;">Elevated</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-slope').innerHTML = slopeStatus;
+
+      document.getElementById('val-ca').textContent = `${inputs.ca} vessels`;
+      const caStatus = parseInt(inputs.ca, 10) > 0 ? '<span class="badge badge-danger" style="font-size:0.6rem; padding: 2px 6px;">Occlusion</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-ca').innerHTML = caStatus;
+
+      const thalLabels = ['Normal (0)', 'Fixed Defect (1)', 'Normal (2)', 'Revers. Defect (3)'];
+      document.getElementById('val-thal').textContent = thalLabels[parseInt(inputs.thal, 10)] || inputs.thal;
+      const thalStatus = parseInt(inputs.thal, 10) === 3 ? '<span class="badge badge-danger" style="font-size:0.6rem; padding: 2px 6px;">Defect</span>' : '<span class="badge badge-success" style="font-size:0.6rem; padding: 2px 6px;">Normal</span>';
+      document.getElementById('status-thal').innerHTML = thalStatus;
+
+      // 5. Write AI Prediction outcomes
+      const isHigh = api.prediction === 1;
+      const outcomeEl = document.getElementById('rep-diag-outcome');
+      outcomeEl.textContent = isHigh ? 'Coronary Stenosis Indicated' : 'Stable Cardiac Profile';
+      outcomeEl.style.color = isHigh ? 'var(--danger)' : 'var(--accent)';
+
+      document.getElementById('rep-prob-box').textContent = `${api.probability}%`;
+      document.getElementById('rep-conf').textContent = `${api.confidence}%`;
       
-      const ecgLabels = ['Normal', 'ST-T Wave Anomaly', 'LV Hypertrophy'];
-      document.getElementById('rep-ecg').textContent = ecgLabels[parseInt(data.ecg, 10)] || 'Normal';
+      const statusTextEl = document.getElementById('rep-status-text');
+      statusTextEl.textContent = api.risk_level.toUpperCase();
+      statusTextEl.style.color = isHigh ? 'var(--danger)' : 'var(--accent)';
 
-      const cpLabels = ['Typical Angina', 'Atypical Angina', 'Non-Anginal Pain', 'Asymptomatic'];
-      document.getElementById('rep-cp').textContent = cpLabels[parseInt(data.cp, 10)] || 'Typical Angina';
-      
-      document.getElementById('rep-hr').textContent = data.hr;
-      document.getElementById('rep-exang').textContent = data.exang === '1' ? 'Yes' : 'No';
-      document.getElementById('rep-peak').textContent = data.peak;
+      // 6. Clinical narrative builder
+      const narrative = `Naive Bayes CDSS evaluation complete. Patient clinical parameters indicate a ${api.risk_level.toUpperCase()} risk profile with a disease probability of ${api.probability}% and statistical confidence rating of ${api.confidence}%. Primary contributing factors: ${api.top_features.join(', ')}. Clinical follow-up advised.`;
+      document.getElementById('rep-clinical-narrative').textContent = narrative;
 
-      const slopeLabels = ['Upsloping', 'Flat', 'Downsloping'];
-      document.getElementById('rep-slope').textContent = slopeLabels[parseInt(data.slope, 10)] || 'Upsloping';
-      
-      document.getElementById('rep-ca').textContent = `${data.ca} vessels colored`;
-
-      // 5. Synchronize recommendation lists
-      const sourceRecs = document.querySelectorAll('#res-rec-list li');
-      const targetRecsList = document.getElementById('rep-rec-list');
-      if (targetRecsList) {
-        targetRecsList.innerHTML = '';
-        sourceRecs.forEach(li => {
-          const item = document.createElement('li');
-          item.textContent = li.textContent.trim();
-          targetRecsList.appendChild(item);
+      // 7. Inject risk factors ranking table rows
+      const riskFactorsBody = document.getElementById('rep-risk-factors-body');
+      if (riskFactorsBody) {
+        riskFactorsBody.innerHTML = '';
+        api.top_features.forEach((feat, idx) => {
+          const row = document.createElement('tr');
+          row.style.borderBottom = '1px solid #e2e8f0';
+          row.innerHTML = `
+            <td style="padding: 4px 6px;">${idx + 1}</td>
+            <td style="padding: 4px 6px; font-weight:600;">${feat}</td>
+            <td style="padding: 4px 6px; color: ${isHigh ? 'var(--danger)' : 'var(--primary)'};">${idx < 2 ? 'High Impact' : 'Medium Impact'}</td>
+          `;
+          riskFactorsBody.appendChild(row);
         });
       }
+
+      // Show doctor signature element explicitly on generation
+      const sig = document.getElementById('rep-doctor-sig');
+      if (sig) sig.style.display = 'inline-block';
+
     } catch (err) {
       console.error('Failure populating print report details:', err);
     }
